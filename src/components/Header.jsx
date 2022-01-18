@@ -7,6 +7,8 @@ import { Icon, IconButton } from '@mui/material';
 function Header() {
     return (
         <div className='header'>
+
+            {/* HELLO */}
             <div className="title">
                 Contacts
             </div>
@@ -15,11 +17,11 @@ function Header() {
 
             </div>
 
-            <div className="settings-container">
+            {/* <div className="settings-container">
                 <IconButton>
                     <SettingsIcon style={{fontSize:'48'}}/>
                 </IconButton>
-            </div>
+            </div> */}
 
             <div className="profile-container">
                 <IconButton>
