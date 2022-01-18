@@ -2,19 +2,19 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux"
 import { fetchContacts } from '../redux/reducerIndex'
 
-function ContactsViewer({contacts, fetchAllContacts}) {
+function ContactsViewer(props) {
 
     useEffect(() => {
-        fetchAllContacts()
+        props.fetchAllContacts()
     }, [])
 
-    console.log(contacts.contacts)
+    console.log(props.contacts.contacts)
 
     return (
         <div>
             {
                 
-                contacts.contacts.map(contact => <p key={contact.contactId}>{contact.name}</p>)
+                props.contacts.contacts.map(contact => <p key={contact.contactId}>{contact.name}</p>)
             }
         </div>
     )

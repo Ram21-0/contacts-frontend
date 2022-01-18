@@ -1,4 +1,4 @@
-import { GET_ALL_CONTACTS } from './contactsActionTypes.js'
+import { SET_CONTACTS } from './contactsActionTypes.js'
 
 const initialState = {
     contacts: []
@@ -6,7 +6,7 @@ const initialState = {
 
 const reducer = (state=initialState, action) => {
     switch(action.type) {
-        case GET_ALL_CONTACTS: 
+        case SET_CONTACTS: 
             return {
                 ...state,
                 contacts: action.payload

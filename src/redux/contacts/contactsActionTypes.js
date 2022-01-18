@@ -1,1 +1,1 @@
-export const GET_ALL_CONTACTS = "GET_ALL_CONTACTS"
+export const SET_CONTACTS = "GET_ALL_CONTACTS"

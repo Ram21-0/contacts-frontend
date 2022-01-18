@@ -1,4 +1,4 @@
-import { GET_ALL_CONTACTS } from "./contactsActionTypes.js";
+import { SET_CONTACTS } from "./contactsActionTypes.js";
 import axios from "axios"
 
 export const fetchContacts = () => {
@@ -6,7 +6,7 @@ export const fetchContacts = () => {
         axios.get("http://localhost:8080/contacts")
         .then(response => {
             console.log("data",response.data);
-            dispatch(getAllContacts(response.data))
+            dispatch(setContacts(response.data))
         })
         .catch(err => console.log("err",err))
         
@@ -22,9 +22,9 @@ export const fetchContacts = () => {
     }
 }
 
-export const getAllContacts = (contacts) => {
+export const setContacts = (contacts) => {
     return {
-        type: GET_ALL_CONTACTS,
+        type: SET_CONTACTS,
         payload: contacts
     }
 }
