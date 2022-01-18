@@ -1,13 +1,12 @@
 import React from 'react'
-import { Link, BrowserRouter, Route, Routes } from "react-router-dom"
-import Header from "./Header";
-import Login from './Login';
+import { Link } from 'react-router-dom'
 
 function ContactsPage() {
     return (
-
         <div>
-     
+            <Link to="/contact/id"> Contact1 </Link>
+            <Link to="/edit/id"> AddContact </Link>
+
         </div>
     )
 }

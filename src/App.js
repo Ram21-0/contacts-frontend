@@ -7,32 +7,29 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import ContactsPage from "./components/ContactsPage";
+import Contact from "./components/Contact";
+import Edit from "./components/Edit";
+import MyProfile from "./components/MyProflie";
 
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {/* <Header /> */}
+        <Header /> 
         <Routes>
           <Route path="/" element={<Home/>}></Route>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/register" element={<Register/>}></Route>
           <Route path="/contacts" element = {<ContactsPage/>}></Route>
-
-          {/* <Route path="/about" component={About}></Route>
-          <Route path="/login" component={Login}></Route>
-          <Route path="/register" component={Register}></Route>
-          <Route path="/cts" component ={Contact}></Route>
-          <Route path="/myProfile" component={MyProflie}></Route> */}
+          <Route path="/contact/:id" element={<Contact/>}></Route>
+          <Route path="/edit/:id" element={<Edit/>}></Route>
+          <Route path="/user" element={<MyProfile/>}></Route>
+          
         </Routes>
-      </div>
-      {/* <Header/> */}
-      {/* <Routes>
-
-        <Route path="/" element={<Link to="/contacts">Link</Link>}>  </Route>
-        <Route path="/contacts"/>
-      </Routes> */}
+        
+        </div>
+      
   </BrowserRouter>
   );
 }
