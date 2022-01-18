@@ -1,13 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter, Route, Routes } from "react-router-dom"
+import Header from "./components/Header";
+
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      App
-
-      <Link to={"/login"}>Login</Link>
-    </div>
+    <BrowserRouter>
+      <Header/>
+      <Routes>
+        <Route path="/" element={<Link to="/contacts">Link</Link>}>  </Route>
+        <Route path="/contacts"/>
+      </Routes>
+  </BrowserRouter>
   );
 }
 

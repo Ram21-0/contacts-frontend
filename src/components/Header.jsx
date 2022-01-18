@@ -10,6 +10,7 @@ function Header() {
             <div className="title">
                 Contacts
             </div>
+            
             <div className="search-container">
 
             </div>
