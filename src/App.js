@@ -1,6 +1,10 @@
 import { Link, BrowserRouter, Route, Routes } from "react-router-dom"
 import Header from "./components/Header";
 
+import { Provider } from "react-redux";
+
+import { store } from "./redux/reduxStore.js"
+
 import './App.css';
 import Landing from "./components/landing/Landing";
 import Login from "./components/Login";
@@ -11,9 +15,32 @@ import Contact from "./components/Contact";
 import Edit from "./components/Edit";
 import MyProfile from "./components/MyProflie";
 
+import axios from "axios";
+
+
 
 function App() {
+
+  // axios.get("http://localhost:8080/contacts")
+  //       .then(response => {
+  //           console.log("data",response.data);
+  //           // dispatch(getAllContacts(response.data))
+  //       })
+  //       .catch(err => console.log("err",err))
+
+  // const x = async () => {
+  //   axios.get("http://localhost:8080/contacts"
+  //   ).then(response => console.log("response.body",response.data))
+  //   .catch(err => console.log("err",err))
+  // };
+
+  // x()
+  
+
+
+
   return (
+    <Provider store={store}>
     <BrowserRouter>
       <div className="App">
         <Header /> 
@@ -31,6 +58,7 @@ function App() {
         </div>
       
   </BrowserRouter>
+  </Provider>
   );
 }
 
