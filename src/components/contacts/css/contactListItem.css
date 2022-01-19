@@ -1,0 +1,7 @@
+.contact-list-item {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    width: max-content;
+    justify-content: space-between;
+}

@@ -1,11 +1,16 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux"
-import { fetchContacts } from '../redux/reducerIndex'
+import { fetchContacts } from '../../redux/reducerIndex'
 
-function ContactsViewer(props) {
+import Contact from "./Contact"
+import ContactListItem from './ContactListItem'
+
+function ContactListview(props) { 
+
+    const fetchAllContactsFunc = props.fetchAllContacts
 
     useEffect(() => {
-        props.fetchAllContacts()
+        fetchAllContactsFunc()
     }, [])
 
     console.log(props.contacts.contacts)
@@ -13,8 +18,12 @@ function ContactsViewer(props) {
     return (
         <div>
             {
-                
-                props.contacts.contacts.map(contact => <p key={contact.contactId}>{contact.name}</p>)
+                props.contacts.contacts.map( 
+                    contact => 
+                        <div>
+                            <ContactListItem contact={contact}/> 
+                        </div>
+                )
             }
         </div>
     )
@@ -35,4 +44,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ContactsViewer)
+)(ContactListview)

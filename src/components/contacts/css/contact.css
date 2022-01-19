@@ -1,0 +1,27 @@
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    /* height: 100%; */
+    /* width: 100%; */
+    /* scroll-behavior: auto; */
+}
+
+.contact-head {
+    display: flex;
+    height: max-content;
+}
+
+.contact-head-img {
+    width: fit-content;
+}
+
+.contact-head-data {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-body {
+    display: flex;
+    flex-direction: column;
+}
