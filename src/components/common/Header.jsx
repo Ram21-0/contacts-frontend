@@ -29,7 +29,7 @@ function Header(props) {
 
                 {
                     props.search &&
-                    <Searchbar />
+                    <Searchbar setResult={props.setResult}/>
                 }
 
             </div>

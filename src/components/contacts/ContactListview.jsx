@@ -20,14 +20,13 @@ function ContactListview(props) {
         navigate("/contacts/create")
     }
 
+    console.log(props.list);
+
     return (
         <div className='contact-list-container'>
             {
                 props.list.map( 
-                    contact => 
-                        <div>
-                            <ContactListItem contact={contact}/> 
-                        </div>
+                    contact => <ContactListItem contact={contact}/> 
                 )
             }
 

@@ -1,15 +1,18 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import "./css/contact.css"
 
 import { Avatar } from '@mui/material';
 import CustomAvatar from '../common/CustomAvatar';
+import { Edit } from '@mui/icons-material';
 
 
 function Contact(props) {
 
     const { state } = useLocation()
     console.log("state in contact", state)
+
+    const navigate = useNavigate()
 
     const contact = state
 
@@ -30,10 +33,14 @@ function Contact(props) {
             </div>
 
             <div className="contact-body">
-                <p>{state.address}</p>
-                <p>{state.dob}</p>
-                <p>{state.score}</p>
+                <p>{contact.address}</p>
+                <p>{contact.dob}</p>
+                <p>{contact.score}</p>
             </div>
+
+            <Edit onClick={() => {
+                navigate("/contacts/edit/" + contact.contactId, { state: contact})
+            }}/>
         </div>
     )
 }

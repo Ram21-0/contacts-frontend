@@ -79,11 +79,13 @@ function Login(props) {
         <Button type="submit" variant="contained" color="primary" >
           Login In
         </Button>
+
         <Link to="/register">
           <Button >
             Register
           </Button>
         </Link>
+        
       </form>
     </Container>
   );

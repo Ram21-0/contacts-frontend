@@ -22,13 +22,9 @@ function ContactListItem(props) {
     }
 
     function onClickHandler() {
-        // props.selectContact(contact)
 
-        console.log("clicked",contact.contactId);
-
-        axios.post(`http://localhost:8080/contacts/getcontact/${contact.contactId}`, {},{ 
+        axios.post(`http://localhost:8080/contacts/getcontact/${contact.contactId}`, {}, { 
             headers: {
-                // "Authorization" : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW1AZmxvY2suY29tIiwiZXhwIjoxNjQyNjk2NzAzLCJpYXQiOjE2NDI2NjA3MDN9.bM-fanzRVJWjSzEndUWGFjUjU50eD9ADwsgERGXImks`
                 "Authorization" : `Bearer ` + user.jwt
             }
         }).then(response => {

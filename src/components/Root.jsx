@@ -3,12 +3,12 @@ import { Navigate } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 function Root(props) {
-    console.log(props.user.user.loggedIn);
+    console.log(props);
     return (
         
         <div>
             <Navigate to={
-                props.user.user.loggedIn ? "/contacts" : "/home"
+                props.user.loggedIn ? "/contacts" : "/home"
             }/>
         </div>
   )

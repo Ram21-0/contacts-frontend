@@ -11,19 +11,27 @@ import Contact from './Contact'
 import ContactsSideBar from './ContactsSideBar'
 import CreateContact from './CreateContact'
 import EditContact from './EditContact'
+import EditC from '../EditC'
 
 function ContactsPage(props) {
 
     const fetchAllContactsFunc = props.fetchAllContacts
     const navigate = useNavigate()
 
+    // setTimeout(() => {
+    //     console.log("timeout");
+    // }, 1000);
+
+    const [list, setList] = useState([]);
+
     useEffect(() => {
         if(!props.user.loggedIn) {
             navigate("/login")
         }
         fetchAllContactsFunc(props.user)
+        setList(Object.values(props.contacts.contacts))
     }, [])
-
+    
     const contactList = Object.values(props.contacts.contacts)
 
     return (
@@ -31,7 +39,7 @@ function ContactsPage(props) {
         <div className='contacts-page'>
 
             <div className="contacts-top">
-                <Header search title="Contacts"/>
+                <Header search setResult={setList} title="Contacts"/>
             </div>
             
             <div className="contacts-bottom">
@@ -45,7 +53,7 @@ function ContactsPage(props) {
                         <Route path="" element={<ContactListview list={contactList}/>} />
                         <Route path="/:id" element={<Contact/>} />
                         <Route path="/create" element={<CreateContact/>} />
-                        <Route path="/edit/:id" element={<EditContact/>} />
+                        {/* <Route path="/edit/:id" element={<EditC/>} /> */}
                     </Routes>
                 </div>
 

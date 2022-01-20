@@ -10,28 +10,22 @@ import axios from "axios"
 import { insertContact } from '../../redux/reducerIndex';
 import { connect } from "react-redux"
 import { useNavigate } from 'react-router-dom'
+import TextInputField from '../common/TextInputField';
 
 function CreateContact(props) {
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm();
+      const { register,handleSubmit, formState: { errors } } = useForm();
 
       const navigate = useNavigate()
       const user = props.user
 
 
       const onSubmit = (data) => {
-          //do something on submit
-          console.log("user state", user);
+
           data.userId = user.user.userId
-          console.log("data",data);
-          console.log("props.user",props.user)
-          console.log("headers",{headers: {
-            "Authorization" : `Bearer ${props.user.jwt}`
-        }})
+
+          console.log("post data",data);
+
           axios.post("http://localhost:8080/contacts/add", 
           data,
           { 
@@ -40,7 +34,6 @@ function CreateContact(props) {
               }
           },
           ).then(response => {
-              // dispatch(deleteContactAction(contact))
               const newContact = response.data
               console.log("inserted",newContact)
               props.insertContact(newContact)
@@ -57,12 +50,11 @@ function CreateContact(props) {
           <h1>Contact</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
 
-            <Box mb={2}>
+            {/* <Box mb={2}>
               <TextField
                 variant="outlined"
                 label="email"
                 fullWidth
-                autoComplete="email"
                 autoFocus
                 {...register("email", {
                   required: "Required field",
@@ -71,9 +63,10 @@ function CreateContact(props) {
                     message: "Invalid email address",
                   },
                 })}
-                error={!!errors?.email}
               />
-            </Box>
+            </Box> */}
+
+            <TextInputField register={register} label="email"/>
 
             <Box mb={2}>
               <TextField
