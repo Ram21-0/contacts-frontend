@@ -3,18 +3,25 @@ import axios from "axios"
 
 export const fetchContacts = () => {
 
-    return (dispatch) => {
-        dispatch(setContactsAction(data))
-    }
-
     // return (dispatch) => {
-    //     axios.get("http://localhost:8080/contacts")
-    //     .then(response => {
-    //         console.log("data",response.data);
-    //         dispatch(setContacts(response.data))
-    //     })
-    //     .catch(err => console.log("err",err))
+    //     dispatch(setContactsAction(data))
     // }
+
+    return (dispatch) => {
+        axios.get(
+            "http://localhost:8080/contacts", 
+            { 
+                headers: {
+                    "Authorization" : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW1AZmxvY2suY29tIiwiZXhwIjoxNjQyNjk2NzAzLCJpYXQiOjE2NDI2NjA3MDN9.bM-fanzRVJWjSzEndUWGFjUjU50eD9ADwsgERGXImks`
+                }
+            }
+        )
+        .then(response => {
+            console.log("data",response.data);
+            dispatch(setContactsAction(response.data))
+        })
+        .catch(err => console.log("err",err))
+    }
 }
 
 export const insertContact = (contact) => {

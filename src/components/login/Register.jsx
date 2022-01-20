@@ -13,8 +13,9 @@ function Register() {
         handleSubmit,
         formState: { errors },
       } = useForm();
-      const onSubmit = async () => {
+      const onSubmit = async (data) => {
         //do something on submit
+        console.log(data);
         };
         
       return (
@@ -25,11 +26,11 @@ function Register() {
             <Box mb={2}>
               <TextField
                 variant="outlined"
-                label="email"
+                label="emaiil"
                 fullWidth
                 autoComplete="email"
                 autoFocus
-                {...register("email", {
+                {...register("userId", {
                   required: "Required field",
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,

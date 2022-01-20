@@ -6,14 +6,31 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { useForm } from "react-hook-form";
 
+import axios from "axios"
+
 function Login() {
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm();
-      const onSubmit = async ({ email,password }) => {
+      const onSubmit = async (data) => {
         //do something on submit
+          // console.log(data)
+        //   console.log({
+        //     userId: data.userId,
+        //     password: data.password
+        // });
+          
+          axios.post("http://localhost:8080/authenticate",{
+              userId: data.userId,
+              password: data.password
+          }).then(response => {
+              console.log(response);
+          }).catch(error => {
+              console.log(error)
+          })
+
         };
         
       return (
@@ -27,7 +44,7 @@ function Login() {
                 fullWidth
                 autoComplete="email"
                 autoFocus
-                {...register("email", {
+                {...register("userId", {
                   required: "Required field",
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -42,6 +59,7 @@ function Login() {
               <TextField
                 variant="outlined"
                 label="password"
+                type="password"
                 fullWidth
                 autoFocus
                 {...register("password", {
