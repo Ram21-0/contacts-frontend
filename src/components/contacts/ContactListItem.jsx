@@ -18,7 +18,7 @@ function ContactListItem(props) {
 
     return (
 
-        <div className="contact-list-item">
+        <div className="contact-list-item" onClick={onClickHandler}>
             <CustomAvatar srcText={contact.name[0].toUpperCase()} onClick={() => console.log("clicked")}/>
 
             <span>{contact.name}</span>
@@ -29,9 +29,9 @@ function ContactListItem(props) {
                 <Edit/>
             </IconButton>
 
-            <IconButton onClick={onClickHandler}>
+            {/* <IconButton>
                 <RemoveRedEyeIcon/>
-            </IconButton>
+            </IconButton> */}
         </div>
     )
 }

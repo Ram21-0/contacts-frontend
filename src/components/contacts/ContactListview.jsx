@@ -1,3 +1,4 @@
+import { ContactMailRounded } from '@mui/icons-material'
 import React, { useEffect } from 'react'
 import { connect } from "react-redux"
 import { fetchContacts } from '../../redux/reducerIndex'
@@ -18,10 +19,10 @@ function ContactListview(props) {
     return (
         <div>
             {
-                props.contacts.contacts.map( 
-                    contact => 
+                Object.keys(props.contacts.contacts).map( 
+                    contactId => 
                         <div>
-                            <ContactListItem contact={contact}/> 
+                            <ContactListItem contact={props.contacts.contacts[contactId]}/> 
                         </div>
                 )
             }

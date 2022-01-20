@@ -1,10 +1,10 @@
-import { SET_CONTACTS } from "./contactsActionTypes.js";
+import { DELETE_CONTACT, INSERT_CONTACT, SET_CONTACTS, UPDATE_CONTACT } from "./contactsActionTypes.js";
 import axios from "axios"
 
 export const fetchContacts = () => {
 
     return (dispatch) => {
-        dispatch(setContacts(data))
+        dispatch(setContactsAction(data))
     }
 
     // return (dispatch) => {
@@ -17,13 +17,52 @@ export const fetchContacts = () => {
     // }
 }
 
-export const setContacts = (contacts) => {
+export const insertContact = (contact) => {
+    return (dispatch) => {
+        dispatch(insertContactAction(contact))
+    }
+}
+
+export const updateContact = (contact) => {
+    return (dispatch) => {
+        dispatch(updateContactAction(contact))
+    }
+}
+
+export const deleteContact = (contact) => {
+    return (dispatch) => {
+        dispatch(deleteContactAction(contact))
+    }
+}
+
+
+export const setContactsAction = (contacts) => {
     return {
         type: SET_CONTACTS,
         payload: contacts
     }
 }
 
+export const insertContactAction = (contact) => {
+    return {
+        type: INSERT_CONTACT,
+        payload: contact
+    }
+}
+
+export const updateContactAction = (contact) => {
+    return {
+        type: UPDATE_CONTACT,
+        payload: contact
+    }
+}
+
+export const deleteContactAction = (contact) => {
+    return {
+        type: DELETE_CONTACT,
+        payload: contact
+    }
+}
 
 const data = [
     {

@@ -14,7 +14,7 @@ function ContactsPage() {
         <div className='contacts-page'>
 
             <div className="contacts-top">
-                <Header search/>
+                <Header search title="Contacts"/>
             </div>
             
             <div className="contacts-bottom">
