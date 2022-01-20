@@ -1,0 +1,12 @@
+.fab {
+    margin: 0px;
+    top: auto;
+    right: 50px;
+    bottom: 50px;
+    left: auto;
+    position: fixed;
+};
+
+.contact-list-container {
+    height: 100vw;
+}

@@ -6,26 +6,30 @@ import { fetchContacts } from '../../redux/reducerIndex'
 import Contact from "./Contact"
 import ContactListItem from './ContactListItem'
 
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+
+import './css/contactListview.css'
+
 function ContactListview(props) { 
 
-    const fetchAllContactsFunc = props.fetchAllContacts
-
-    useEffect(() => {
-        fetchAllContactsFunc()
-    }, [])
-
-    console.log(props.contacts.contacts)
-
     return (
-        <div>
+        <div className='contact-list-container'>
             {
-                Object.keys(props.contacts.contacts).map( 
-                    contactId => 
+                props.list.map( 
+                    contact => 
                         <div>
-                            <ContactListItem contact={props.contacts.contacts[contactId]}/> 
+                            <ContactListItem contact={contact}/> 
                         </div>
                 )
             }
+
+
+                <Fab className="fab" color="primary" variant="extended">
+                    <AddIcon sx={{ mr: 1 }} />
+                    {"Add Contact"}
+                </Fab>
+
         </div>
     )
 }
