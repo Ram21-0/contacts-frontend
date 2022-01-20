@@ -7,17 +7,49 @@ import Box from "@material-ui/core/Box";
 import { useForm } from "react-hook-form";
 
 import axios from "axios"
+import { insertContact } from '../../redux/reducerIndex';
+import { connect } from "react-redux"
+import { useNavigate } from 'react-router-dom'
 
-function CreateContact() {
+function CreateContact(props) {
 
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm();
-      const onSubmit = async (data) => {
-        //do something on submit
-        console.log(data);
+
+      const navigate = useNavigate()
+      const user = props.user
+
+
+      const onSubmit = (data) => {
+          //do something on submit
+          console.log("user state", user);
+          data.userId = user.user.userId
+          console.log("data",data);
+          console.log("props.user",props.user)
+          console.log("headers",{headers: {
+            "Authorization" : `Bearer ${props.user.jwt}`
+        }})
+          axios.post("http://localhost:8080/contacts/add", 
+          data,
+          { 
+              headers: {
+                  "Authorization" : `Bearer ${props.user.jwt}`
+              }
+          },
+          ).then(response => {
+              // dispatch(deleteContactAction(contact))
+              const newContact = response.data
+              console.log("inserted",newContact)
+              props.insertContact(newContact)
+              // todo : write a getUserById query
+              navigate(`/contacts`,{contact: newContact})
+              
+          }).catch(error => {
+              console.log("error",error)
+          })
         };
         
       return (
@@ -32,7 +64,7 @@ function CreateContact() {
                 fullWidth
                 autoComplete="email"
                 autoFocus
-                {...register("userId", {
+                {...register("email", {
                   required: "Required field",
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -109,4 +141,22 @@ function CreateContact() {
     
 }
 
-export default CreateContact 
+const mapStateToProps = (state) => {
+  return {
+      user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      // fetchAllContacts: () => dispatch(fetchContacts())
+      insertContact: (contact) => dispatch(insertContact(contact))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateContact)
+
+// export default CreateContact 

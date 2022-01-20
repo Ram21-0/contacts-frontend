@@ -2,6 +2,7 @@ import { ContactMailRounded } from '@mui/icons-material'
 import React, { useEffect } from 'react'
 import { connect } from "react-redux"
 import { fetchContacts } from '../../redux/reducerIndex'
+import { useNavigate } from 'react-router-dom'
 
 import Contact from "./Contact"
 import ContactListItem from './ContactListItem'
@@ -12,6 +13,12 @@ import AddIcon from '@mui/icons-material/Add';
 import './css/contactListview.css'
 
 function ContactListview(props) { 
+
+    const navigate = useNavigate()
+
+    function addContactHandler() {
+        navigate("/contacts/create")
+    }
 
     return (
         <div className='contact-list-container'>
@@ -25,7 +32,7 @@ function ContactListview(props) {
             }
 
 
-                <Fab className="fab" color="primary" variant="extended">
+                <Fab className="fab" color="primary" variant="extended" onClick={addContactHandler}>
                     <AddIcon sx={{ mr: 1 }} />
                     {"Add Contact"}
                 </Fab>

@@ -5,31 +5,40 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { useForm } from "react-hook-form";
+import { connect } from "react-redux"
 
 import axios from "axios"
+import { loginCurrentUser } from '../../redux/reducerIndex';
+import { useNavigate } from 'react-router-dom'
 
-function Login() {
+function Login(props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = async (data) => {
-    //do something on submit
-    // console.log(data)
-    //   console.log({
-    //     userId: data.userId,
-    //     password: data.password
-    // });
 
-    axios.post("http://localhost:8080/authenticate", {
-      userId: data.userId,
-      password: data.password
-    }).then(response => {
-      console.log(response);
-    }).catch(error => {
-      console.log(error)
-    })
+  const navigate = useNavigate()
+
+  const onSubmit = async (requestData) => {
+      console.log(requestData);
+
+      axios.post("http://localhost:8080/authenticate", {
+            userId: requestData.userId,
+            password: requestData.password
+      }).then(response => {
+          console.log("response.data.jwt",response.data.jwt)
+          props.login({
+              jwt: response.data.jwt, 
+              user: { 
+                  userId: requestData.userId
+              }
+          })//response.data, { userId: requestData.userId })
+          navigate("/contacts")
+      }).catch(error => {
+          console.log(error)
+          alert("Invalid credentials")
+      })  
 
   };
 
@@ -81,4 +90,19 @@ function Login() {
 
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (data) => dispatch(loginCurrentUser(data))
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Login)

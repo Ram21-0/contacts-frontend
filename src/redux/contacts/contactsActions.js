@@ -1,7 +1,7 @@
 import { DELETE_CONTACT, INSERT_CONTACT, SET_CONTACTS, UPDATE_CONTACT } from "./contactsActionTypes.js";
 import axios from "axios"
 
-export const fetchContacts = () => {
+export const fetchContacts = (user) => {
 
     // return (dispatch) => {
     //     dispatch(setContactsAction(data))
@@ -12,7 +12,8 @@ export const fetchContacts = () => {
             "http://localhost:8080/contacts", 
             { 
                 headers: {
-                    "Authorization" : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW1AZmxvY2suY29tIiwiZXhwIjoxNjQyNjk2NzAzLCJpYXQiOjE2NDI2NjA3MDN9.bM-fanzRVJWjSzEndUWGFjUjU50eD9ADwsgERGXImks`
+                    // "Authorization" : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW1AZmxvY2suY29tIiwiZXhwIjoxNjQyNjk2NzAzLCJpYXQiOjE2NDI2NjA3MDN9.bM-fanzRVJWjSzEndUWGFjUjU50eD9ADwsgERGXImks`
+                    "Authorization" : `Bearer ` + user.jwt
                 }
             }
         )
@@ -36,7 +37,7 @@ export const updateContact = (contact) => {
     }
 }
 
-export const deleteContact = (contact) => {
+export const deleteContact = (contact,user) => {
 
     return (dispatch) => {
         // dispatch(deleteContactAction(contact))
@@ -44,7 +45,7 @@ export const deleteContact = (contact) => {
         axios.delete("http://localhost:8080/contacts/delete/" + contact.contactId, 
         { 
             headers: {
-                "Authorization" : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW1AZmxvY2suY29tIiwiZXhwIjoxNjQyNjk2NzAzLCJpYXQiOjE2NDI2NjA3MDN9.bM-fanzRVJWjSzEndUWGFjUjU50eD9ADwsgERGXImks`
+                "Authorization" : `Bearer ` + user.jwt
             }
         }
         ).then(response => {

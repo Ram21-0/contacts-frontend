@@ -48,15 +48,9 @@ function App() {
 
           </Route>
 
-              {/* can eliminate */}
-          {/* <Route path="/contact/:id" element={<Contact/>}>
+          {/* <Route path="/contact" element={<CreateContact/>}>
 
-          </Route> */}
-
-              {/* can eliminate */}
-          <Route path="/contact" element={<CreateContact/>}>
-
-          </Route> 
+          </Route>  */}
 
           <Route path="/user" element={<MyProfile/>}>
 

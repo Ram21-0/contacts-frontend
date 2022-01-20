@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, Routes, Route, useLocation } from 'react-router-dom'
+import { Link, Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import ContactListview from './ContactListview'
 import Header from '../common/Header'
 import { connect } from "react-redux"
@@ -15,9 +15,13 @@ import EditContact from './EditContact'
 function ContactsPage(props) {
 
     const fetchAllContactsFunc = props.fetchAllContacts
+    const navigate = useNavigate()
 
     useEffect(() => {
-        fetchAllContactsFunc()
+        if(!props.user.loggedIn) {
+            navigate("/login")
+        }
+        fetchAllContactsFunc(props.user)
     }, [])
 
     const contactList = Object.values(props.contacts.contacts)
@@ -40,7 +44,7 @@ function ContactsPage(props) {
                     <Routes>
                         <Route path="" element={<ContactListview list={contactList}/>} />
                         <Route path="/:id" element={<Contact/>} />
-                        <Route path="/add" element={<CreateContact/>} />
+                        <Route path="/create" element={<CreateContact/>} />
                         <Route path="/edit/:id" element={<EditContact/>} />
                     </Routes>
                 </div>
@@ -52,13 +56,14 @@ function ContactsPage(props) {
 
 const mapStateToProps = (state) => {
     return {
-        contacts: state.contacts
+        contacts: state.contacts,
+        user: state.user
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAllContacts: () => dispatch(fetchContacts())
+        fetchAllContacts: (user) => dispatch(fetchContacts(user))
     }
 }
 

@@ -14,14 +14,27 @@ import axios from "axios"
 function ContactListItem(props) {
 
     let contact = props.contact
+    let user = props.user
     const navigate = useNavigate()
 
     async function handleDelete() {
-        props.deleteContact(contact)
+        props.deleteContact(contact,user)
     }
 
     function onClickHandler() {
         // props.selectContact(contact)
+
+        axios.post(`http://localhost:8080/getcontact/${contact.contactId}`, {},{ 
+            headers: {
+                // "Authorization" : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW1AZmxvY2suY29tIiwiZXhwIjoxNjQyNjk2NzAzLCJpYXQiOjE2NDI2NjA3MDN9.bM-fanzRVJWjSzEndUWGFjUjU50eD9ADwsgERGXImks`
+                "Authorization" : `Bearer ` + user.jwt
+                // "Access-Control-Allow-Origin": "*"
+            }
+        }).then(response => {
+            console.log("response ",response);
+        }).catch(error => {
+            console.log("err",error);
+        })
         
         navigate("/contacts/" + contact.contactId, {state: contact})
     }
@@ -49,14 +62,15 @@ function ContactListItem(props) {
 
 const mapStateToProps = (state) => {
     return {
-        contacts: state.contacts
+        contacts: state.contacts,
+        user: state.user
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         // fetchAllContacts: () => dispatch(fetchContacts()),
-        deleteContact: (contact) => dispatch(deleteContact(contact))
+        deleteContact: (contact,user) => dispatch(deleteContact(contact,user))
     }
 }
 
