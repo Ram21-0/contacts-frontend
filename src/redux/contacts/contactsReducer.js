@@ -5,9 +5,13 @@ const initialState = {
 }
 
 const reducer = (state=initialState, action) => {
+
+    let mContact;
+    let newStateValue;
+
     switch(action.type) {
         case SET_CONTACTS: 
-            let newStateValue = {}
+            newStateValue = {}
             action.payload.forEach(contact => newStateValue[contact.contactId] = contact)
             return {
                 ...state,
@@ -16,8 +20,8 @@ const reducer = (state=initialState, action) => {
 
         case INSERT_CONTACT:
             newStateValue = state.contacts
-            let newContact = action.payload
-            newStateValue[newContact.contactId] = newContact
+            mContact = action.payload
+            newStateValue[mContact.contactId] = mContact
             return {
                 ...state,
                 contacts: newStateValue
@@ -25,8 +29,8 @@ const reducer = (state=initialState, action) => {
 
         case UPDATE_CONTACT:
             newStateValue = state.contacts
-            newContact = action.payload
-            newStateValue[newContact.contactId] = newContact
+            mContact = action.payload
+            newStateValue[mContact.contactId] = mContact
             return {
                 ...state,
                 contacts: newStateValue
@@ -34,12 +38,14 @@ const reducer = (state=initialState, action) => {
 
 
         case DELETE_CONTACT:
-            // newStateValue = state.contacts
-            // newContact = action.payload
+            newStateValue = state.contacts
+            mContact = action.payload
+            delete newStateValue[mContact.contactId]
             // newStateValue[newContact.contactId] = contact
+            console.log("delete " + mContact.name);
             return {
-                ...state
-                // contacts: newStateValue
+                ...state,
+                contacts: newStateValue
             }
         
         default: return state

@@ -37,11 +37,23 @@ export const updateContact = (contact) => {
 }
 
 export const deleteContact = (contact) => {
+
     return (dispatch) => {
-        dispatch(deleteContactAction(contact))
+        // dispatch(deleteContactAction(contact))
+
+        axios.delete("http://localhost:8080/contacts/delete/" + contact.contactId, 
+        { 
+            headers: {
+                "Authorization" : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW1AZmxvY2suY29tIiwiZXhwIjoxNjQyNjk2NzAzLCJpYXQiOjE2NDI2NjA3MDN9.bM-fanzRVJWjSzEndUWGFjUjU50eD9ADwsgERGXImks`
+            }
+        }
+        ).then(response => {
+            dispatch(deleteContactAction(contact))
+        }).catch(error => {
+            console.log(error)
+        })
     }
 }
-
 
 export const setContactsAction = (contacts) => {
     return {

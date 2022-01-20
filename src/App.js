@@ -48,16 +48,6 @@ function App() {
 
           </Route>
 
-              {/* can eliminate */}
-          {/* <Route path="/contact/:id" element={<Contact/>}>
-
-          </Route> */}
-
-              {/* can eliminate */}
-          {/* <Route path="/edit/:id" element={<Edit/>}>
-
-          </Route> */}
-
           <Route path="/user" element={<MyProfile/>}>
 
           </Route>
