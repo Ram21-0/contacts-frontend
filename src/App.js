@@ -12,7 +12,7 @@ import Register from "./components/login/Register";
 
 import ContactsPage from "./components/contacts/ContactsPage";
 import Contact from "./components/contacts/Contact";
-import Edit from "./components/Edit";
+import CreateContact from "./components/contacts/CreateContact";
 import MyProfile from "./components/MyProflie";
 import Root from "./components/Root";
 
@@ -47,6 +47,16 @@ function App() {
           <Route path="/contacts/*" element = {<ContactsPage/>}>
 
           </Route>
+
+              {/* can eliminate */}
+          {/* <Route path="/contact/:id" element={<Contact/>}>
+
+          </Route> */}
+
+              {/* can eliminate */}
+          <Route path="/contact" element={<CreateContact/>}>
+
+          </Route> 
 
           <Route path="/user" element={<MyProfile/>}>
 
