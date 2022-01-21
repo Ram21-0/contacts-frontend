@@ -15,6 +15,12 @@ import EditC from '../EditC'
 
 function ContactsPage(props) {
 
+    console.log("local",localStorage.getItem("user", {
+        loggedIn: false,
+        user: null,
+        jwt: null
+    }))
+
     const fetchAllContactsFunc = props.fetchAllContacts
     const navigate = useNavigate()
 

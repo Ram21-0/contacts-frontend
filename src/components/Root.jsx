@@ -8,7 +8,7 @@ function Root(props) {
         
         <div>
             <Navigate to={
-                props.user.loggedIn ? "/contacts" : "/home"
+                props.user.loggedIn ? "/contacts" : "/login"
             }/>
         </div>
   )

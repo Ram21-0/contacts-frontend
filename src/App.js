@@ -24,37 +24,15 @@ function App() {
 
         <Routes>
 
-          <Route path="/" element={<Root/>}>
-              
-          </Route>
+          <Route path="/" element={<Root/>} />
 
-          <Route path="/home" element={<Landing/>}>
+          <Route path="/login" element={<Login/>} />
 
-          </Route>
+          <Route path="/register" element={<Register/>} />
 
-          <Route path="/login" element={<Login/>}>
-              {
-                // if logged in redirect to /contacts
-              }
-          </Route>
+          <Route path="/contacts/*" element = {<ContactsPage/>} />
 
-          <Route path="/register" element={<Register/>}>
-              {
-                // if logged in redirect to /contacts
-              }
-          </Route>
-
-          <Route path="/contacts/*" element = {<ContactsPage/>}>
-
-          </Route>
-
-          {/* <Route path="/contact" element={<CreateContact/>}>
-
-          </Route>  */}
-
-          <Route path="/user" element={<MyProfile/>}>
-
-          </Route>
+          <Route path="/user" element={<MyProfile/>} />
           
         </Routes>
         
