@@ -26,6 +26,8 @@ function ContactsPage(props) {
 
     const [list, setList] = useState([]);
 
+    const [searchQuery, setSearchQuery] = useState("");
+
     useEffect(() => {
         if(!props.user.loggedIn) {
             navigate("/login")
@@ -36,12 +38,27 @@ function ContactsPage(props) {
     
     const contactList = Object.values(props.contacts.contacts)
 
+    function compareFunction(contact1,contact2) {
+        if(contact1.score === contact2.score) {
+            return contact1.name.localeCompare(contact2.name)
+        }
+        return contact2.score - contact1.score
+    }
+
+    function getListFromSearchQuery() {
+        console.log("searchquery",searchQuery);
+        if(!searchQuery || searchQuery === "") return contactList
+        const currList = []
+        return contactList.filter(contact => contact.name.trim().toLowerCase().startsWith(searchQuery))
+            .sort(compareFunction)
+    }
+
     return (
 
         <div className='contacts-page'>
 
             <div className="contacts-top">
-                <Header search setResult={setList} title="Contacts"/>
+                <Header search setResult={setList} setSearchQuery={setSearchQuery} title="Contacts"/>
             </div>
             
             <div className="contacts-bottom">
@@ -52,7 +69,9 @@ function ContactsPage(props) {
 
                 <div className="contacts-body">
                     <Routes>
-                        <Route path="" element={<ContactListview list={contactList}/>} />
+                        {/* <Route path="" element={<ContactListview list={contactList}/>} /> */}
+                        <Route path="" element={<ContactListview list={getListFromSearchQuery()}/>} />
+
                         <Route path="/:id" element={<Contact/>} />
                         <Route path="/create" element={<CreateContact/>} />
                         <Route path="/edit/:id" element={<EditContact/>} />

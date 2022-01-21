@@ -21,6 +21,13 @@ function Searchbar(props) {
     
     const result = Object.values(props.contacts.contacts)
 
+    function implementSearch(searchQuery) {
+        searchQuery = searchQuery.trim().toLowerCase()
+        // if(!searchQuery || searchQuery == "") return;
+
+        props.setSearchQuery(searchQuery)
+    }
+
     function search(searchQuery) {
         searchQuery = searchQuery.trim()
         if(!searchQuery || searchQuery === "") {
@@ -52,6 +59,7 @@ function Searchbar(props) {
                         console.log(e.target.value)
                         setQuery(e.target.value)
                         search(e.target.value)
+                        implementSearch(e.target.value)
                     }}
                     InputProps={{
                         startAdornment: 
