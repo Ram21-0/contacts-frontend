@@ -1,7 +1,8 @@
 import { DELETE_CONTACT, INSERT_CONTACT, SET_CONTACTS, UPDATE_CONTACT } from './contactsActionTypes.js'
 
 const initialState = {
-    contacts: {}
+    contacts: {},
+    contactsInDisplay: {}
 }
 
 const reducer = (state=initialState, action) => {
@@ -15,7 +16,8 @@ const reducer = (state=initialState, action) => {
             action.payload.forEach(contact => newStateValue[contact.contactId] = contact)
             return {
                 ...state,
-                contacts: newStateValue
+                contacts: newStateValue,
+                contactsInDisplay: newStateValue
             }
 
         case INSERT_CONTACT:
@@ -24,7 +26,8 @@ const reducer = (state=initialState, action) => {
             newStateValue[mContact.contactId] = mContact
             return {
                 ...state,
-                contacts: newStateValue
+                contacts: newStateValue,
+                contactsInDisplay: newStateValue
             }
 
         case UPDATE_CONTACT:
@@ -33,7 +36,8 @@ const reducer = (state=initialState, action) => {
             newStateValue[mContact.contactId] = mContact
             return {
                 ...state,
-                contacts: newStateValue
+                contacts: newStateValue,
+                contactsInDisplay: newStateValue
             }
 
 
@@ -45,7 +49,8 @@ const reducer = (state=initialState, action) => {
             console.log("delete " + mContact.name);
             return {
                 ...state,
-                contacts: newStateValue
+                contacts: newStateValue,
+                contactsInDisplay: newStateValue
             }
         
         default: return state

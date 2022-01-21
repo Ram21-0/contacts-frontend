@@ -6,16 +6,40 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { useForm } from "react-hook-form";
 
+import axios from "axios"
+import { loginCurrentUser } from '../../redux/reducerIndex';
+import { useNavigate } from 'react-router-dom'
+import { connect } from "react-redux"
 
-function Register() {
+
+
+function Register(props) {
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm();
-      const onSubmit = async (data) => {
+
+      const navigate = useNavigate()
+
+      const onSubmit = (requestData) => {
         //do something on submit
-        console.log(data);
+        console.log(requestData);
+        axios.post("http://localhost:8080/register",
+            requestData
+        ).then(response => {
+            console.log("registered",response)
+            props.login({
+              jwt: response.data.jwt, 
+              user: { 
+                  userId: requestData.userId
+              }
+          })
+          navigate("/contacts")
+        }).catch(error => {
+          console.log("error in reg",error);
+        })
+        // axios.p
         };
         
       return (
@@ -48,7 +72,6 @@ function Register() {
                 label="password"
                 type="password"
                 fullWidth
-                autoFocus
                 {...register("password", {
                   required: "Required field",
                 })}
@@ -60,7 +83,6 @@ function Register() {
                 variant="outlined"
                 label="Name"
                 fullWidth
-                autoFocus
                 {...register("name", {
                   required: "Required field",
                 })}
@@ -72,7 +94,6 @@ function Register() {
                 variant="outlined"
                 label="Phone Number"
                 fullWidth
-                autoFocus
                 {...register("phoneNo", {
                   required: "Required field",
                 })}
@@ -83,7 +104,6 @@ function Register() {
                 variant="outlined"
                 label="Address"
                 fullWidth
-                autoFocus
                 {...register("address", {
                   required: "Required field",
                 })}
@@ -96,7 +116,6 @@ function Register() {
                 variant="outlined"
                 label="DOB YYYY-MM-DD"
                 fullWidth
-                autoFocus
                 {...register("dob", {
                   required: "Required field",
                 })}
@@ -118,4 +137,20 @@ function Register() {
     
 }
 
-export default Register
+
+const mapStateToProps = (state) => {
+  return {
+      user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      login: (data) => dispatch(loginCurrentUser(data))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register)

@@ -80,7 +80,6 @@ function CreateContact(props) {
                 variant="outlined"
                 label="Name"
                 fullWidth
-                autoFocus
                 {...register("name", {
                   required: "Required field",
                 })}
@@ -92,7 +91,6 @@ function CreateContact(props) {
                 variant="outlined"
                 label="Phone Number"
                 fullWidth
-                autoFocus
                 {...register("phoneNo", {
                   required: "Required field",
                 })}
@@ -104,7 +102,6 @@ function CreateContact(props) {
                 variant="outlined"
                 label="Address"
                 fullWidth
-                autoFocus
                 {...register("address", {
                   required: "Required field",
                 })}
@@ -117,7 +114,6 @@ function CreateContact(props) {
                 variant="outlined"
                 label="DOB YYYY-MM-DD"
                 fullWidth
-                autoFocus
                 {...register("dob", {
                   required: "Required field",
                 })}

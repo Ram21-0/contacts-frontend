@@ -22,6 +22,8 @@ function ContactsPage(props) {
     //     console.log("timeout");
     // }, 1000);
 
+    console.log(props.user)
+
     const [list, setList] = useState([]);
 
     useEffect(() => {
@@ -53,7 +55,7 @@ function ContactsPage(props) {
                         <Route path="" element={<ContactListview list={contactList}/>} />
                         <Route path="/:id" element={<Contact/>} />
                         <Route path="/create" element={<CreateContact/>} />
-                        {/* <Route path="/edit/:id" element={<EditC/>} /> */}
+                        <Route path="/edit/:id" element={<EditContact/>} />
                     </Routes>
                 </div>
 

@@ -7,21 +7,50 @@ import Box from "@material-ui/core/Box";
 import { useForm } from "react-hook-form";
 import axios from "axios" ;
 
-import { useLocation } from "react-router-dom"
+import { connect } from 'react-redux'
+import { useLocation, useNavigate } from "react-router-dom"
+import { updateContact,insertContact } from '../../redux/reducerIndex';
 
 function EditContact(props) {
+
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm();
-      const onSubmit = async (data) => {
+
+      const navigate = useNavigate()
+
+      console.log("props on edit",props);
+
+      const onSubmit = (data) => {
         //do something on submit
         console.log(data);
-        };
+        data = {
+          ...data,
+          userId: contact.userId,
+          contactId: contact.contactId
+        }
+        console.log("props",props);
+        axios.put("http://localhost:8080/contacts/update", 
+        data,
+        { 
+            headers: {
+                "Authorization" : `Bearer ${props.user.jwt}`
+            }
+        }).then(response => {
+            console.log("response on submit edit",response.data);
+            props.updateContact(response.data)
+            navigate("/contacts")
+
+        }).catch(error => {
+          console.log(error);
+        })
+      };
 
     const { state } = useLocation()
-    const contact = state.contact
+    const contact = state
+    console.log("state in edit contact",state);
 
     return (
         <Container maxWidth="xs">
@@ -35,7 +64,8 @@ function EditContact(props) {
                 fullWidth
                 autoComplete="email"
                 autoFocus
-                {...register("userId", {
+                defaultValue={contact.email}
+                {...register("email", {
                   required: "Required field",
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -51,8 +81,8 @@ function EditContact(props) {
               <TextField
                 variant="outlined"
                 label="Name"
+                defaultValue={contact.name}
                 fullWidth
-                autoFocus
                 {...register("name", {
                   required: "Required field",
                 })}
@@ -63,8 +93,9 @@ function EditContact(props) {
               <TextField
                 variant="outlined"
                 label="Phone Number"
+                defaultValue={contact.phoneNo}
+
                 fullWidth
-                autoFocus
                 {...register("phoneNo", {
                   required: "Required field",
                 })}
@@ -76,7 +107,7 @@ function EditContact(props) {
                 variant="outlined"
                 label="Address"
                 fullWidth
-                autoFocus
+                defaultValue={contact.address}
                 {...register("address", {
                   required: "Required field",
                 })}
@@ -88,8 +119,8 @@ function EditContact(props) {
               <TextField
                 variant="outlined"
                 label="DOB YYYY-MM-DD"
+                defaultValue={contact.dob}
                 fullWidth
-                autoFocus
                 {...register("dob", {
                   required: "Required field",
                 })}
@@ -110,4 +141,21 @@ function EditContact(props) {
       );
 }
 
-export default EditContact;
+const mapStateToProps = (state) => {
+  return {
+      user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      // fetchAllContacts: () => dispatch(fetchContacts())
+      insertContact: (contact) => dispatch(insertContact(contact)),
+      updateContact: (contact) => dispatch(updateContact(contact))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditContact)

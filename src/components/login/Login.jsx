@@ -27,13 +27,12 @@ function Login(props) {
             userId: requestData.userId,
             password: requestData.password
       }).then(response => {
-          console.log("response.data.jwt",response.data.jwt)
+          console.log("response.data.user on login",response.data.user)
           props.login({
               jwt: response.data.jwt, 
-              user: { 
-                  userId: requestData.userId
-              }
+              user: response.data.user
           })//response.data, { userId: requestData.userId })
+          console.log("props after",props.user);
           navigate("/contacts")
       }).catch(error => {
           console.log(error)
@@ -70,7 +69,6 @@ function Login(props) {
             label="password"
             type="password"
             fullWidth
-            autoFocus
             {...register("password", {
               required: "Required field",
             })}
