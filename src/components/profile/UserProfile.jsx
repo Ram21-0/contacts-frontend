@@ -1,8 +1,9 @@
 import React from 'react'
 
 import { connect } from "react-redux"
-import Header from './common/Header.jsx';
-import InformationCard from './common/InformationCard.jsx';
+import Header from '../common/Header'
+import InformationCard from '../common/InformationCard'
+import "./userProfile.css"
 
 function UserProfile(props) {
 
