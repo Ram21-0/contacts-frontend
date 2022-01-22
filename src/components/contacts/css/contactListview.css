@@ -1,12 +1,21 @@
 .fab {
     margin: 0px;
     top: auto;
+    align-self: flex-end;
     right: 50px;
     bottom: 50px;
     left: auto;
     position: fixed;
 };
 
-.contact-list-container {
-    height: 100vw;
+.contactt-list-container {
+    height: 100%;
+    /* height: fit-content; */
+    padding-top: 100px;
+    width: 100vw;
+    padding-right: 5%;
+    /* overflow-y: auto; */
+    background-color: lightpink;
+    display: flex;
+    flex-direction: column;
 }

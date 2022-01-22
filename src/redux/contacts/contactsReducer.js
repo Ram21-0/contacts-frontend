@@ -1,8 +1,7 @@
 import { DELETE_CONTACT, INSERT_CONTACT, SET_CONTACTS, UPDATE_CONTACT } from './contactsActionTypes.js'
 
 const initialState = {
-    contacts: {},
-    contactsInDisplay: {}
+    contacts: {}
 }
 
 const reducer = (state=initialState, action) => {
@@ -31,6 +30,7 @@ const reducer = (state=initialState, action) => {
             }
 
         case UPDATE_CONTACT:
+            console.log("update payload",action.payload)
             newStateValue = state.contacts
             mContact = action.payload
             newStateValue[mContact.contactId] = mContact

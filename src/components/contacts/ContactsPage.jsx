@@ -10,8 +10,7 @@ import "./css/contactsPage.css"
 import Contact from './Contact'
 import ContactsSideBar from './ContactsSideBar'
 import CreateContact from './CreateContact'
-import EditContact from './EditContact'
-import EditC from '../EditC'
+import EditExistingContact from './EditExistingContact'
 
 function ContactsPage(props) {
 
@@ -23,10 +22,6 @@ function ContactsPage(props) {
 
     const fetchAllContactsFunc = props.fetchAllContacts
     const navigate = useNavigate()
-
-    // setTimeout(() => {
-    //     console.log("timeout");
-    // }, 1000);
 
     console.log(props.user)
 
@@ -64,7 +59,7 @@ function ContactsPage(props) {
         <div className='contacts-page'>
 
             <div className="contacts-top">
-                <Header search setResult={setList} setSearchQuery={setSearchQuery} title="Contacts"/>
+                <Header search setSearchQuery={setSearchQuery} title="Contacts"/>
             </div>
             
             <div className="contacts-bottom">
@@ -78,10 +73,12 @@ function ContactsPage(props) {
                         {/* <Route path="" element={<ContactListview list={contactList}/>} /> */}
                         <Route path="" element={<ContactListview list={getListFromSearchQuery()}/>} />
 
-                        <Route path="/:id" element={<Contact/>} />
+                        <Route path="/:id" element={<Contact type="contact"/>} />
                         <Route path="/create" element={<CreateContact/>} />
-                        <Route path="/edit/:id" element={<EditContact/>} />
+                        <Route path="/edit/:id" element={<EditExistingContact/>} />
                     </Routes>
+
+                    
                 </div>
 
             </div>        

@@ -1,16 +1,14 @@
-import { ContactMailRounded } from '@mui/icons-material'
 import React, { useEffect } from 'react'
 import { connect } from "react-redux"
 import { fetchContacts } from '../../redux/reducerIndex'
 import { useNavigate } from 'react-router-dom'
 
-import Contact from "./Contact"
 import ContactListItem from './ContactListItem'
 
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
-import './css/contactListview.css'
+import "./css/contactListview.css"
 
 function ContactListview(props) { 
 
@@ -20,23 +18,36 @@ function ContactListview(props) {
         navigate("/contacts/create")
     }
 
+    const style = {
+        height: '100%',
+        width: '100%',
+        paddingRight: '5%',
+        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column'
+    }
+
     console.log(props.list);
 
     return (
-        <div className='contact-list-container'>
+        <div style={style}>
+        {/* <div className='contactt-list-container'> */}
             {
                 props.list.map( 
-                    contact => <ContactListItem contact={contact}/> 
+                    contact => <ContactListItem key={contact.contactId} contact={contact}/> 
                 )
             }
 
-
-                <Fab className="fab" color="primary" variant="extended" onClick={addContactHandler}>
-                    <AddIcon sx={{ mr: 1 }} />
-                    {"Add Contact"}
-                </Fab>
-
+            <div className="fab">
+            <Fab className="fab" color="primary" variant="extended" onClick={addContactHandler}>
+                <AddIcon sx={{ mr: 1 }} />
+                {"Add Contact"}
+            </Fab>
+            </div>
+            
+                
         </div>
+        // </div>
     )
 }
 

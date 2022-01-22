@@ -1,0 +1,19 @@
+.card-container {
+    margin-top: 5%;
+    height: fit-content;
+    width: fit-content;
+    max-width: 60vw;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    padding: 2%;
+    justify-self: center;
+    flex-direction: column;
+    overflow-y: auto;
+    border: lightgrey 1px solid;
+    border-radius: 20px;
+}
+
+.card-body {
+    margin-top: 10px;
+}

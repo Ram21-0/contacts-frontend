@@ -40,8 +40,11 @@ function EditContact(props) {
             }
         }).then(response => {
             console.log("response on submit edit",response.data);
-            props.updateContact(response.data)
-            navigate("/contacts")
+            const editedContact = response.data
+            props.updateContact(editedContact)
+            // navigate("/contacts")
+            // navigate(`/contacts`,{contact: response.data})
+            navigate("/contacts/" + editedContact.contactId, {state: editedContact})
 
         }).catch(error => {
           console.log(error);
@@ -149,7 +152,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      // fetchAllContacts: () => dispatch(fetchContacts())
       insertContact: (contact) => dispatch(insertContact(contact)),
       updateContact: (contact) => dispatch(updateContact(contact))
   }

@@ -40,19 +40,19 @@ export const updateContact = (contact) => {
 export const deleteContact = (contact,user) => {
 
     return (dispatch) => {
-        // dispatch(deleteContactAction(contact))
+        dispatch(deleteContactAction(contact))
 
-        axios.delete("http://localhost:8080/contacts/delete/" + contact.contactId, 
-        { 
-            headers: {
-                "Authorization" : `Bearer ` + user.jwt
-            }
-        }
-        ).then(response => {
-            dispatch(deleteContactAction(contact))
-        }).catch(error => {
-            console.log(error)
-        })
+        // axios.delete("http://localhost:8080/contacts/delete/" + contact.contactId, 
+        // { 
+        //     headers: {
+        //         "Authorization" : `Bearer ` + user.jwt
+        //     }
+        // }
+        // ).then(response => {
+        //     dispatch(deleteContactAction(contact))
+        // }).catch(error => {
+        //     console.log(error)
+        // })
     }
 }
 

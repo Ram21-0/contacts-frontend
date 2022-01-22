@@ -5,6 +5,7 @@ import "./css/header.css"
 import { Icon, IconButton } from '@mui/material';
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import Searchbar from './Searchbar';
+import CustomAvatar from './CustomAvatar';
 
 
 function Header(props) {
@@ -13,9 +14,13 @@ function Header(props) {
     const location = useLocation()
 
     function onHeaderClick(event) {
-        if(location.pathname !== "/contacts") {
+        if(location.pathname !== "/contacts" && location.pathname !== "/profile") {
             navigate("/contacts")
         }
+    }
+
+    function handleProfileClick(event) {
+        navigate("/profile")
     }
 
     return (
@@ -29,17 +34,18 @@ function Header(props) {
 
                 {
                     props.search &&
-                    <Searchbar setResult={props.setResult} setSearchQuery={props.setSearchQuery}/>
+                    <Searchbar setSearchQuery={props.setSearchQuery}/>
                 }
 
             </div>
 
             <div className="profile-container">
-                <Link to="/user">
-                    <IconButton>
+                {/* <Link to="/user"> */}
+                    <IconButton onClick={handleProfileClick}>
                         <AccountCircleIcon style={{ fontSize: '48' }} />
+                        {/* <CustomAvatar text={props.name} size={36}/> */}
                     </IconButton>
-                </Link>
+                {/* </Link> */}
             </div>
         </div>
     )

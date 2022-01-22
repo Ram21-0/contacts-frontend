@@ -5,11 +5,13 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { useForm } from "react-hook-form";
+import { browserHistory } from 'react-router';
 
 import axios from "axios"
-import { insertContact } from '../../redux/reducerIndex';
+import { insertContact, updateContact } from '../../redux/reducerIndex';
 import { connect } from "react-redux"
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react';
 
 function CreateContact(props) {
 
@@ -22,9 +24,20 @@ function CreateContact(props) {
       const navigate = useNavigate()
       const user = props.user
 
+      const existingContact = props.contact
 
       const onSubmit = (data) => {
+          if(props.contact) {
+              editExistingContact(data)
+          }
+          else {
+            createNewContact(data)
+          }
+      }
+
+      const createNewContact = (data) => {
           //do something on submit
+          console.log("create new contact")
           console.log("user state", user);
           data.userId = user.user.userId
           console.log("data",data);
@@ -40,17 +53,44 @@ function CreateContact(props) {
               }
           },
           ).then(response => {
-              // dispatch(deleteContactAction(contact))
               const newContact = response.data
               console.log("inserted",newContact)
               props.insertContact(newContact)
-              // todo : write a getUserById query
-              navigate(`/contacts`,{contact: newContact})
+              navigate("/contacts/" + newContact.contactId, {state: newContact})
               
           }).catch(error => {
               console.log("error",error)
           })
         };
+
+        const editExistingContact = (data) => {
+          console.log(data);
+          data = {
+            ...data,
+            userId: existingContact.userId,
+            contactId: existingContact.contactId,
+            score: existingContact.score
+          }
+          console.log("props",props);
+          axios.put("http://localhost:8080/contacts/update", 
+          data,
+          { 
+              headers: {
+                  "Authorization" : `Bearer ${props.user.jwt}`
+              }
+          }).then(response => {
+              console.log("response on submit edit",response.data);
+              const editedContact = response.data
+              props.updateContact(editedContact)
+              // navigate("/contacts")
+              // navigate(`/contacts`,{contact: response.data})
+              navigate("/contacts/" + editedContact.contactId, {state: editedContact})
+  
+          }).catch(error => {
+            console.log(error);
+          })
+        };
+        
         
       return (
         <Container maxWidth="xs">
@@ -63,6 +103,7 @@ function CreateContact(props) {
                 label="email"
                 fullWidth
                 autoComplete="email"
+                defaultValue={existingContact ? existingContact.email : ""}
                 autoFocus
                 {...register("email", {
                   required: "Required field",
@@ -79,6 +120,7 @@ function CreateContact(props) {
               <TextField
                 variant="outlined"
                 label="Name"
+                defaultValue={existingContact ? existingContact.name : ""}
                 fullWidth
                 {...register("name", {
                   required: "Required field",
@@ -91,6 +133,7 @@ function CreateContact(props) {
                 variant="outlined"
                 label="Phone Number"
                 fullWidth
+                defaultValue={existingContact ? existingContact.phoneNo : ""}
                 {...register("phoneNo", {
                   required: "Required field",
                 })}
@@ -102,6 +145,7 @@ function CreateContact(props) {
                 variant="outlined"
                 label="Address"
                 fullWidth
+                defaultValue={existingContact ? existingContact.address : ""}
                 {...register("address", {
                   required: "Required field",
                 })}
@@ -114,6 +158,7 @@ function CreateContact(props) {
                 variant="outlined"
                 label="DOB YYYY-MM-DD"
                 fullWidth
+                defaultValue={existingContact ? existingContact.dob : ""}
                 {...register("dob", {
                   required: "Required field",
                 })}
@@ -126,7 +171,7 @@ function CreateContact(props) {
             </Button>
             <Link to="/contacts">
             <Button >
-              Return 
+              Discard 
             </Button>
             </Link>
           </form>
@@ -145,7 +190,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
       // fetchAllContacts: () => dispatch(fetchContacts())
-      insertContact: (contact) => dispatch(insertContact(contact))
+      insertContact: (contact) => dispatch(insertContact(contact)),
+      updateContact: (contact) => dispatch(updateContact(contact))
   }
 }
 
@@ -153,5 +199,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CreateContact)
-
-// export default CreateContact 

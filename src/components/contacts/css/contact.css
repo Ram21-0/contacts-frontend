@@ -1,9 +1,18 @@
 .contact-container {
+    margin-top: 5%;
+    height: fit-content;
+    width: fit-content;
+    max-width: 60vw;
     display: flex;
+    align-self: center;
+    justify-content: center;
+    padding: 2%;
+    justify-self: center;
     flex-direction: column;
-    /* height: 100%; */
-    /* width: 100%; */
-    /* scroll-behavior: auto; */
+    overflow-y: auto;
+    border: lightgrey 1px solid;
+    border-radius: 20px;
+    /* background-color: lightpink; */
 }
 
 .contact-head {
@@ -12,16 +21,23 @@
 }
 
 .contact-head-img {
-    width: fit-content;
+    flex: 0.2;
 }
 
 .contact-head-data {
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
+    flex: 0.8;
+}
+
+.contact-name {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
 
 .contact-body {
     display: flex;
     flex-direction: column;
+}
+
+.hidden {
+    display: none;
 }

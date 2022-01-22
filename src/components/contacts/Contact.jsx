@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import "./css/contact.css"
 
-import { Avatar } from '@mui/material';
+import { Avatar, Fab } from '@mui/material';
 import CustomAvatar from '../common/CustomAvatar';
 import { Edit } from '@mui/icons-material';
+import Email from '../common/Email';
+import Phone from '../common/Phone';
+import NameCard from '../common/NameCard';
+import Data from '../common/Data';
+import InformationCard from '../common/InformationCard';
 
 
 function Contact(props) {
+
+    useEffect(() => {
+        window.history.back = () => navigate("contacts") 
+    })
 
     const { state } = useLocation()
     console.log("state in contact", state)
@@ -15,33 +24,52 @@ function Contact(props) {
     const navigate = useNavigate()
 
     const contact = state
+    const dataValues = [
+        { label: "Address", value: contact.address },
+        { label: "Date of birth", value: contact.dob },
+        { label: "Score", value: contact.score },
+    ]
+
+    function editHandler() {
+        navigate("/contacts/edit/" + contact.contactId, { state: contact})
+    }
 
     return (
-        <div>
-            <div className="contact-head">
-                <div className="contact-head-img">
-                    <CustomAvatar square size={60} srcText={"AB"}/>
-                    <Avatar style={{borderRadius:0}}>AB</Avatar>
-                </div>
+        // <div className="contact-container">
 
-                <div className="contact-head-data">
-                    <p>{contact.name}</p>
-                    <p>{contact.email}</p>
-                    <p>{contact.phoneNo}</p>
-                </div>
+            <InformationCard
+                    name={contact.name}
+                    email={contact.email}
+                    phoneNo={contact.phoneNo} 
+                    dataValues={dataValues}
+                    edit
+                    editHandler={editHandler} />
 
-            </div>
+            /* <NameCard 
+                name={contact.name} 
+                phoneNo={contact.phoneNo} 
+                emailId={contact.email} />
 
             <div className="contact-body">
-                <p>{contact.address}</p>
-                <p>{contact.dob}</p>
-                <p>{contact.score}</p>
-            </div>
 
-            <Edit onClick={() => {
-                navigate("/contacts/edit/" + contact.contactId, { state: contact})
-            }}/>
-        </div>
+                <Data label="Address" value={contact.address}/>
+                <Data label="Date of birth" value={contact.dob}/>
+                {
+                    props.type == "contact"
+
+                    && <Data label="Score" value={contact.score} classNamw="hidden"/>
+                } 
+                {
+                    props.type == "contact"
+                    && <div className="fab-edit">
+                        <Fab iconClassName="fab-edit-icon" color="primary" onClick={editHandler}>
+                            <Edit />
+                        </Fab>
+                    </div>
+                }
+                
+            </div> */
+        // </div>
     )
 }
 

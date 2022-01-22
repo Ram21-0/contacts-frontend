@@ -13,7 +13,7 @@ import Register from "./components/login/Register";
 import ContactsPage from "./components/contacts/ContactsPage";
 import Contact from "./components/contacts/Contact";
 import CreateContact from "./components/contacts/CreateContact";
-import MyProfile from "./components/MyProflie";
+import UserProfile from "./components/UserProfile";
 import Root from "./components/Root";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
 
           <Route path="/contacts/*" element = {<ContactsPage/>} />
 
-          <Route path="/user" element={<MyProfile/>} />
+          <Route path="/profile" element={<UserProfile/>} />
           
         </Routes>
         

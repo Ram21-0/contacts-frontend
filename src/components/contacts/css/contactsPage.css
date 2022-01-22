@@ -7,7 +7,6 @@
 
 .contacts-top {
     height: fit-content;
-    /* background-color: red; */
 }
 
 .contacts-bottom {
@@ -15,16 +14,16 @@
     width: 100vw;
     display: flex;
     flex-direction: row;
-
+    overflow-y: hidden;
 }
 
 .contacts-sidebar {
     /* flex: 0.2; */
     width: 20vw;
-    /* background-color: hotpink; */
 }
 
 .contacts-body {
     /* flex: 0.8; */
     width: 80vw;
+    overflow-y: auto;
 }

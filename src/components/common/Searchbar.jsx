@@ -15,50 +15,21 @@ import { SearchOutlined } from '@mui/icons-material';
 
 function Searchbar(props) {
 
-    // const { register, watch } = useForm()
-
     const [query, setQuery] = useState("");
-    
-    const result = Object.values(props.contacts.contacts)
 
     function implementSearch(searchQuery) {
         searchQuery = searchQuery.trim().toLowerCase()
-        // if(!searchQuery || searchQuery == "") return;
-
         props.setSearchQuery(searchQuery)
     }
 
-    function search(searchQuery) {
-        searchQuery = searchQuery.trim()
-        if(!searchQuery || searchQuery === "") {
-            props.setResult(result)
-            return
-        }
-
-        searchQuery = searchQuery.toLowerCase()
-        props.setResult(
-            result.filter(contact => contact.name.toLowerCase().startsWith(searchQuery))
-        )
-    }
-
-    // const filterOptions = createFilterOptions({
-    //     matchFrom: 'start',
-    //     stringify: (option) => option.name,
-    //   });
-
-    // const filterOptions = (options, { inputValue }) => matchSorter(options, inputValue);
-
     return (
 
-        <div>
-            
+        // <div>
             <div className="search">
                 <TextField className="search-bar-input"
                     value={query}
                     onChange={(e) => {
-                        console.log(e.target.value)
                         setQuery(e.target.value)
-                        search(e.target.value)
                         implementSearch(e.target.value)
                     }}
                     InputProps={{
@@ -70,7 +41,7 @@ function Searchbar(props) {
                 />
             </div>
             
-        </div>
+        // {/* </div> */}
     )
 }
 
