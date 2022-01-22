@@ -31,9 +31,7 @@ function Register(props) {
             console.log("registered",response)
             props.login({
               jwt: response.data.jwt, 
-              user: { 
-                  userId: requestData.userId
-              }
+              user: response.data.user
           })
           navigate("/contacts")
         }).catch(error => {
