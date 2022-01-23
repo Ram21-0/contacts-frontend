@@ -12,8 +12,13 @@
     overflow-y: auto;
     border: lightgrey 1px solid;
     border-radius: 20px;
+    box-sizing: content-box
 }
 
 .card-body {
     margin-top: 10px;
+}
+
+.fab-edit {
+    align-self: flex-end;
 }

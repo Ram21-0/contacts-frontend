@@ -27,11 +27,8 @@ function ContactListview(props) {
         flexDirection: 'column'
     }
 
-    console.log(props.list);
-
     return (
         <div style={style}>
-        {/* <div className='contactt-list-container'> */}
             {
                 props.list.map( 
                     contact => <ContactListItem key={contact.contactId} contact={contact}/> 
@@ -39,15 +36,13 @@ function ContactListview(props) {
             }
 
             <div className="fab">
-            <Fab className="fab" color="primary" variant="extended" onClick={addContactHandler}>
-                <AddIcon sx={{ mr: 1 }} />
-                {"Add Contact"}
-            </Fab>
+                <Fab className="fab" color="primary" variant="extended" onClick={addContactHandler}>
+                    <AddIcon sx={{ mr: 1 }} />
+                    {"Add Contact"}
+                </Fab>
             </div>
-            
-                
+              
         </div>
-        // </div>
     )
 }
 

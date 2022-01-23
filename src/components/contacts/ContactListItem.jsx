@@ -1,22 +1,18 @@
-import { Edit, RemoveRedEye } from '@mui/icons-material';
+import { RemoveRedEye } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton, Tooltip } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import CustomAvatar from '../common/CustomAvatar';
 import { useNavigate } from 'react-router-dom';
 import { deleteContact, updateContact } from '../../redux/reducerIndex';
-import EmailIcon from '@mui/icons-material/Email';
-import CallIcon from '@mui/icons-material/Call';
 import { connect } from "react-redux"
-
-import axios from "axios"
 
 import "./css/contactListItem.css"
 import Email from '../common/Email';
 import Phone from '../common/Phone';
-import { axiosDeleteRequest } from '../../axios/axios';
-import { DELETE_CONTACT_PATH } from '../../axios/endpoints';
-
+import { axiosDeleteRequest, axiosPostRequest } from '../../axios/axios';
+import { DELETE_CONTACT_PATH, GET_CONTACT_BY_ID_PATH } from '../../axios/endpoints';
+import PopupCard from '../common/PopupCard';
 
 function ContactListItem(props) {
 
@@ -24,28 +20,31 @@ function ContactListItem(props) {
     let user = props.user
     const navigate = useNavigate()
 
-    async function handleDelete() {
+    const [openDialog, setOpenDialog] = useState(false)
+    const [deleteConfirmation, setDeleteConfirmation] = useState(false)
 
+    if(deleteConfirmation) {
         axiosDeleteRequest(
             `${DELETE_CONTACT_PATH}/${contact.contactId}`,
             user,
             (response) => { props.deleteContact(contact) },
             (error) => { console.log(error) }
         )
+        setDeleteConfirmation(false)
+    }
+    
+    function handleDelete() {
+        setOpenDialog(true)
     }
 
-    function handleView(event) {
-
-        axios.post(`http://localhost:8080/contacts/getcontact/${contact.contactId}`, {}, { 
-            headers: {
-                "Authorization" : `Bearer ` + user.jwt
-            }
-        }).then(response => {
-            console.log("response ",response);
-            props.updateContact(response.data)
-        }).catch(error => {
-            console.log("err",error);
-        })
+    function handleView() {
+        axiosPostRequest(
+            `${GET_CONTACT_BY_ID_PATH}/${contact.contactId}`,
+            user,
+            {},
+            (response) => { props.updateContact(response.data) },
+            (error) => { console.log(error) }
+        )
         
         navigate("/contacts/" + contact.contactId, {state: contact})
     }
@@ -53,6 +52,10 @@ function ContactListItem(props) {
     return (
 
         <div className="contact-list-item">
+
+            <PopupCard title={`Delete ${contact.name}?`}
+                openDialog={openDialog} setOpenDialog={setOpenDialog}
+                setConfirmation={setDeleteConfirmation} />
 
             <div className="contact-list-item-body">
 
@@ -70,7 +73,6 @@ function ContactListItem(props) {
                 <div className="contact-detail contact-phone">
                     <Phone phoneNo={contact.phoneNo}/>
                 </div>
-
             </div>
 
             <div className="contact-list-item-right">
@@ -86,7 +88,6 @@ function ContactListItem(props) {
                 </Tooltip>
             </div>
         </div> 
-        // </IconButton>
     )
 }
 
@@ -99,7 +100,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // fetchAllContacts: () => dispatch(fetchContacts()),
         deleteContact: (contact,user) => dispatch(deleteContact(contact,user)),
         updateContact: (contact) => dispatch(updateContact(contact))
     }

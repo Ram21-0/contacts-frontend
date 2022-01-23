@@ -3,15 +3,7 @@ import { Navigate } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 function Root(props) {
-    console.log(props);
-    return (
-        
-        <div>
-            <Navigate to={
-                props.user.loggedIn ? "/contacts" : "/login"
-            }/>
-        </div>
-  )
+    return <Navigate to={ props.user.loggedIn ? "/contacts" : "/login" }/>
 }
 
 const mapStateToProps = (state) => {

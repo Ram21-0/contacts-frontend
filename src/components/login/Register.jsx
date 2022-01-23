@@ -25,34 +25,21 @@ function Register(props) {
       const navigate = useNavigate()
 
       const onSubmit = (requestData) => {
-        //do something on submit
-        console.log(requestData);
-        axiosAuthenticateRequest(
-            REGISTER_PATH,
-            requestData,
-            (response) => {
-                console.log("registered",response)
-                props.login({
-                    jwt: response.data.jwt, 
-                    user: response.data.user
-                })
-                navigate("/contacts")
-             },
-            (error) => { console.log("err in reg", error) }
-        )
-        // axios.post("http://localhost:8080/register",
-        //     requestData
-        // ).then(response => {
-        //     console.log("registered",response)
-        //     props.login({
-        //       jwt: response.data.jwt, 
-        //       user: response.data.user
-        //   })
-        //   navigate("/contacts")
-        // }).catch(error => {
-        //   console.log("error in reg",error);
-        // })
-        // axios.p
+          console.log(requestData);
+          axiosAuthenticateRequest(
+              REGISTER_PATH,
+              requestData,
+              (response) => {
+                  console.log("registered",response)
+                  props.login({
+                      jwt: response.data.jwt, 
+                      user: response.data.user
+                  })
+                  navigate("/contacts")
+              },
+              (error) => { console.log("err in reg", error) }
+          )
+        
         };
         
       return (

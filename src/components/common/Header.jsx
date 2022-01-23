@@ -40,12 +40,9 @@ function Header(props) {
             </div>
 
             <div className="profile-container">
-                {/* <Link to="/user"> */}
-                    <IconButton onClick={handleProfileClick}>
-                        <AccountCircleIcon style={{ fontSize: '48' }} />
-                        {/* <CustomAvatar text={props.name} size={36}/> */}
-                    </IconButton>
-                {/* </Link> */}
+                <IconButton onClick={handleProfileClick}>
+                    <AccountCircleIcon style={{ fontSize: '48' }} />
+                </IconButton>
             </div>
         </div>
     )
