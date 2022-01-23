@@ -10,6 +10,8 @@ import axios from "axios"
 import { loginCurrentUser } from '../../redux/reducerIndex';
 import { useNavigate } from 'react-router-dom'
 import { connect } from "react-redux"
+import { axiosAuthenticateRequest } from '../../axios/axios';
+import { REGISTER_PATH } from '../../axios/endpoints';
 
 
 
@@ -25,18 +27,31 @@ function Register(props) {
       const onSubmit = (requestData) => {
         //do something on submit
         console.log(requestData);
-        axios.post("http://localhost:8080/register",
-            requestData
-        ).then(response => {
-            console.log("registered",response)
-            props.login({
-              jwt: response.data.jwt, 
-              user: response.data.user
-          })
-          navigate("/contacts")
-        }).catch(error => {
-          console.log("error in reg",error);
-        })
+        axiosAuthenticateRequest(
+            REGISTER_PATH,
+            requestData,
+            (response) => {
+                console.log("registered",response)
+                props.login({
+                    jwt: response.data.jwt, 
+                    user: response.data.user
+                })
+                navigate("/contacts")
+             },
+            (error) => { console.log("err in reg", error) }
+        )
+        // axios.post("http://localhost:8080/register",
+        //     requestData
+        // ).then(response => {
+        //     console.log("registered",response)
+        //     props.login({
+        //       jwt: response.data.jwt, 
+        //       user: response.data.user
+        //   })
+        //   navigate("/contacts")
+        // }).catch(error => {
+        //   console.log("error in reg",error);
+        // })
         // axios.p
         };
         

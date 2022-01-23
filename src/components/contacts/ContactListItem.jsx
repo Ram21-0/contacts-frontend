@@ -14,6 +14,8 @@ import axios from "axios"
 import "./css/contactListItem.css"
 import Email from '../common/Email';
 import Phone from '../common/Phone';
+import { axiosDeleteRequest } from '../../axios/axios';
+import { DELETE_CONTACT_PATH } from '../../axios/endpoints';
 
 
 function ContactListItem(props) {
@@ -23,19 +25,13 @@ function ContactListItem(props) {
     const navigate = useNavigate()
 
     async function handleDelete() {
-        axios.delete("http://localhost:8080/contacts/delete/" + contact.contactId, 
-        { 
-            headers: {
-                "Authorization" : `Bearer ` + user.jwt
-            }
-        }
-        ).then(response => {
-            // dispatch(deleteContactAction(contact))
-            props.deleteContact(contact)
-        }).catch(error => {
-            console.log(error)
-        })
-        props.deleteContact(contact,user)
+
+        axiosDeleteRequest(
+            `${DELETE_CONTACT_PATH}/${contact.contactId}`,
+            user,
+            (response) => { props.deleteContact(contact) },
+            (error) => { console.log(error) }
+        )
     }
 
     function handleView(event) {

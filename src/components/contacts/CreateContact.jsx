@@ -12,6 +12,8 @@ import { insertContact, updateContact } from '../../redux/reducerIndex';
 import { connect } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react';
+import { axiosPostRequest, axiosPutRequest } from '../../axios/axios';
+import { ADD_CONTACT_PATH, UPDATE_CONTACT_PATH } from '../../axios/endpoints';
 
 function CreateContact(props) {
 
@@ -45,51 +47,42 @@ function CreateContact(props) {
           console.log("headers",{headers: {
             "Authorization" : `Bearer ${props.user.jwt}`
         }})
-          axios.post("http://localhost:8080/contacts/add", 
-          data,
-          { 
-              headers: {
-                  "Authorization" : `Bearer ${props.user.jwt}`
-              }
-          },
-          ).then(response => {
+        axiosPostRequest(
+            ADD_CONTACT_PATH,
+            user,
+            data,
+            (response) => {
               const newContact = response.data
               console.log("inserted",newContact)
               props.insertContact(newContact)
               navigate("/contacts/" + newContact.contactId, {state: newContact})
-              
-          }).catch(error => {
-              console.log("error",error)
-          })
-        };
+            },
+            (error) => { console.log(error) }
+        )
+      };
 
         const editExistingContact = (data) => {
-          console.log(data);
-          data = {
-            ...data,
-            userId: existingContact.userId,
-            contactId: existingContact.contactId,
-            score: existingContact.score
-          }
-          console.log("props",props);
-          axios.put("http://localhost:8080/contacts/update", 
-          data,
-          { 
-              headers: {
-                  "Authorization" : `Bearer ${props.user.jwt}`
-              }
-          }).then(response => {
-              console.log("response on submit edit",response.data);
-              const editedContact = response.data
-              props.updateContact(editedContact)
-              // navigate("/contacts")
-              // navigate(`/contacts`,{contact: response.data})
-              navigate("/contacts/" + editedContact.contactId, {state: editedContact})
-  
-          }).catch(error => {
-            console.log(error);
-          })
-        };
+            data = {
+                ...data,
+                userId: existingContact.userId,
+                contactId: existingContact.contactId,
+                score: existingContact.score
+            }
+            axiosPutRequest(
+                UPDATE_CONTACT_PATH,
+                user,
+                data,
+                (response) => {
+                    console.log("response on submit edit",response.data);
+                    const editedContact = response.data
+                    props.updateContact(editedContact)
+                    navigate("/contacts/" + editedContact.contactId, {state: editedContact})
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+        }
         
         
       return (

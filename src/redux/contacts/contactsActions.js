@@ -1,5 +1,7 @@
 import { DELETE_CONTACT, INSERT_CONTACT, SET_CONTACTS, UPDATE_CONTACT } from "./contactsActionTypes.js";
 import axios from "axios"
+import { axiosGetRequest } from "../../axios/axios.js";
+import { CONTACTS_PATH } from "../../axios/endpoints.js";
 
 export const fetchContacts = (user) => {
 
@@ -8,20 +10,16 @@ export const fetchContacts = (user) => {
     // }
 
     return (dispatch) => {
-        axios.get(
-            "http://localhost:8080/contacts", 
-            { 
-                headers: {
-                    // "Authorization" : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW1AZmxvY2suY29tIiwiZXhwIjoxNjQyNjk2NzAzLCJpYXQiOjE2NDI2NjA3MDN9.bM-fanzRVJWjSzEndUWGFjUjU50eD9ADwsgERGXImks`
-                    "Authorization" : `Bearer ` + user.jwt
-                }
+        axiosGetRequest(
+            CONTACTS_PATH,
+            user,
+            (response) => { 
+                dispatch(setContactsAction(response.data)) 
+            },
+            (error) => { 
+                console.log(error) 
             }
         )
-        .then(response => {
-            console.log("data",response.data);
-            dispatch(setContactsAction(response.data))
-        })
-        .catch(err => console.log("err",err))
     }
 }
 

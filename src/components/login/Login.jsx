@@ -10,6 +10,8 @@ import { connect } from "react-redux"
 import axios from "axios"
 import { loginCurrentUser } from '../../redux/reducerIndex';
 import { useNavigate } from 'react-router-dom'
+import { axiosAuthenticateRequest, axiosPostRequest } from '../../axios/axios';
+import { LOGIN_PATH } from '../../axios/endpoints';
 
 function Login(props) {
   const {
@@ -23,21 +25,40 @@ function Login(props) {
   const onSubmit = async (requestData) => {
       console.log(requestData);
 
-      axios.post("http://localhost:8080/authenticate", {
+      axiosAuthenticateRequest(
+          LOGIN_PATH,
+          {
             userId: requestData.userId,
             password: requestData.password
-      }).then(response => {
-          console.log("response.data.user on login",response.data.user)
-          props.login({
-              jwt: response.data.jwt, 
-              user: response.data.user
-          })//response.data, { userId: requestData.userId })
-          console.log("props after",props.user);
-          navigate("/contacts")
-      }).catch(error => {
-          console.log(error)
-          alert("Invalid credentials")
-      })  
+          },
+          (response) => { 
+              props.login({
+                  jwt: response.data.jwt, 
+                  user: response.data.user
+              })
+              console.log("props after",props.user);
+              navigate("/contacts")
+          },
+          (error) => { 
+              console.log(error) 
+              alert("Invalid credentials")
+          }
+      )
+      // axios.post("http://localhost:8080/authenticate", {
+      //       userId: requestData.userId,
+      //       password: requestData.password
+      // }).then(response => {
+      //     console.log("response.data.user on login",response.data.user)
+      //     props.login({
+      //         jwt: response.data.jwt, 
+      //         user: response.data.user
+      //     })//response.data, { userId: requestData.userId })
+      //     console.log("props after",props.user);
+      //     navigate("/contacts")
+      // }).catch(error => {
+      //     console.log(error)
+      //     alert("Invalid credentials")
+      // })  
 
   };
 
