@@ -9,8 +9,15 @@ import { useNavigate } from 'react-router-dom';
 import { axiosPostRequest, axiosPutRequest } from "../../axios/axios";
 import { ADD_CONTACT_PATH, UPDATE_CONTACT_PATH } from "../../axios/endpoints";
 import { handleErrors } from "../../axios/errors";
+import PropTypes from 'prop-types'
 
-function CreateContact(props) {
+function ContactForm(props) {
+
+    /* 
+     * Based on props.contact, populate the form 
+     * with data in case of Edit operation
+     * otherwise create new contact
+    */
 
     const {
         register,
@@ -124,7 +131,12 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+ContactForm.propTypes = {
+    contact: PropTypes.object,
+    onFormSubmit: PropTypes.func.isRequired
+}
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreateContact)
+)(ContactForm)

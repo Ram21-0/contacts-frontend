@@ -16,7 +16,6 @@ function CreateContactForm(props) {
     const navigate = useNavigate()
 
     const createNewContact = (data) => {
-        console.log("user state", user);
         data.userId = user.user.userId
 
         axiosPostRequest(
@@ -25,7 +24,6 @@ function CreateContactForm(props) {
             data,
             (response) => {
                 const newContact = response.data
-                console.log("inserted",newContact)
                 props.insertContact(newContact)
                 navigate("/contacts/" + newContact.contactId, {state: newContact})
             },

@@ -26,12 +26,10 @@ function Register(props) {
       const navigate = useNavigate()
 
       const onSubmit = (requestData) => {
-          console.log(requestData);
           axiosAuthenticateRequest(
               REGISTER_PATH,
               requestData,
               (response) => {
-                  console.log("registered",response)
                   props.login({
                       jwt: response.data.jwt, 
                       user: response.data.user

@@ -30,7 +30,6 @@ function EditContactForm(props) {
             user,
             data,
             (response) => {
-                console.log("response on submit edit",response.data);
                 const editedContact = response.data
                 props.updateContact(editedContact)
                 navigate("/contacts/" + editedContact.contactId, {state: editedContact})

@@ -16,17 +16,7 @@ function ContactListview(props) {
         navigate("/contacts/create")
     }
 
-    const style = {
-        height: '100%',
-        width: '100%',
-        paddingRight: '5%',
-        overflowY: 'auto',
-        display: 'flex',
-        flexDirection: 'column'
-    }
-
     return (
-        // <div style={style}>
         <div className='contactt-list-container'>
             {
                 props.list.map( 

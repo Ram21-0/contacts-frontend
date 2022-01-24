@@ -4,3 +4,7 @@
     gap: 10px;
     overflow-x: hidden;
 }
+
+.email > .MuiSvgIcon-root {
+    cursor: pointer;
+}

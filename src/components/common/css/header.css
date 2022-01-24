@@ -16,6 +16,7 @@
     color: darkblue;
     padding: 0;
     height: fit-content;
+    cursor: pointer;
 }
 
 .search-container {

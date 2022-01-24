@@ -30,7 +30,6 @@ const reducer = (state=initialState, action) => {
             }
 
         case UPDATE_CONTACT:
-            console.log("update payload",action.payload)
             newStateValue = state.contacts
             mContact = action.payload
             newStateValue[mContact.contactId] = mContact
@@ -45,8 +44,6 @@ const reducer = (state=initialState, action) => {
             newStateValue = state.contacts
             mContact = action.payload
             delete newStateValue[mContact.contactId]
-            // newStateValue[newContact.contactId] = contact
-            console.log("delete " + mContact.name);
             return {
                 ...state,
                 contacts: newStateValue,

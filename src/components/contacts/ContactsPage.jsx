@@ -18,6 +18,12 @@ function ContactsPage(props) {
 
     const [searchQuery, setSearchQuery] = useState("")
 
+
+    /*
+     * To make the local data consistent with database
+     * syncing with the database every 5 seconds
+     */ 
+
     function syncWithDatabase() {
         if(!props.user.loggedIn) {
             navigate("/login") 
@@ -25,6 +31,7 @@ function ContactsPage(props) {
         fetchAllContactsFunc(props.user)
     }
 
+    // Initial fetching
     useEffect(() => {
         if(!props.user.loggedIn) {
             navigate("/login") 
@@ -50,9 +57,11 @@ function ContactsPage(props) {
     }
 
     function contactComparatorByName(contact1,contact2) {
+        // compare contact by name
         return contact1.name.localeCompare(contact2.name)
     }
 
+    // filter contacts according to search query
     function getListFromSearchQuery() {
         if(!searchQuery || searchQuery === "") return contactList.sort(contactComparatorByScore)
         return contactList.filter(contact => contact.name.trim().toLowerCase().startsWith(searchQuery))

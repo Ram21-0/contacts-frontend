@@ -1,5 +1,4 @@
 export function handleErrors(error) {
-    console.log(error.response) 
     switch(error.response.status) {
         case 401: 
             alert("Invalid credentials")

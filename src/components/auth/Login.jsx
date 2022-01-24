@@ -23,7 +23,6 @@ function Login(props) {
   const navigate = useNavigate()
 
   const onSubmit = async (requestData) => {
-      console.log(requestData);
 
       axiosAuthenticateRequest(
           LOGIN_PATH,
@@ -36,7 +35,6 @@ function Login(props) {
                   jwt: response.data.jwt, 
                   user: response.data.user
               })
-              console.log("props after",props.user);
               navigate("/contacts")
           },
           (error) => {

@@ -14,7 +14,6 @@ function PopupCard(props) {
 
     function performAction() {
         props.setConfirmation(true)
-        console.log("action performed");
         props.setOpenDialog(false)
     }
 

@@ -17,7 +17,8 @@ function Email(props) {
     return (
         <div className='email'>
             <Tooltip title={`Mail ${emailId}`}>
-                <EmailIcon onClick={(event) => onClick(event)}/>
+                <EmailIcon 
+                    onClick={(event) => onClick(event)}/>
             </Tooltip>
             <div>{emailId}</div>
         </div>

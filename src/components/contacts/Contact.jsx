@@ -6,14 +6,13 @@ import InformationCard from '../common/InformationCard';
 
 function Contact() {
 
-    useEffect(() => {
-        window.history.back = () => navigate("contacts") 
-    })
-
+    // retrieve contact passed as a state
     const { state } = useLocation()
     const navigate = useNavigate()
 
     const contact = state
+
+    // data values to feed to the Information Card
     const dataValues = [
         { label: "Address", value: contact.address },
         { label: "Date of birth", value: contact.dob },
