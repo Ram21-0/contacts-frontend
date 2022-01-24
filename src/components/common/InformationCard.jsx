@@ -4,6 +4,7 @@ import React from 'react';
 import Data from './Data';
 import NameCard from './NameCard';
 import "./css/informationCard.css"
+import PropTypes from 'prop-types'
 
 function InformationCard(props) {
 
@@ -36,9 +37,18 @@ function InformationCard(props) {
                     </Tooltip>
                 </div>
             }
-            
+
         </div>
     )
+}
+
+InformationCard.propTypes = {
+    name: PropTypes.string,
+    phoneNo: PropTypes.string,
+    emailId: PropTypes.string,
+    dataValues: PropTypes.array,
+    edit: PropTypes.any,
+    editHandler: PropTypes.func
 }
 
 export default InformationCard;

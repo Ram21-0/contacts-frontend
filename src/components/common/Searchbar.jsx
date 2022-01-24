@@ -3,8 +3,9 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import "./css/searchbar.css"
 
-import { connect } from "react-redux"
 import { SearchOutlined } from '@mui/icons-material';
+import PropTypes from 'prop-types'
+
 
 function Searchbar(props) {
 
@@ -32,6 +33,10 @@ function Searchbar(props) {
             />
         </div>
     )
+}
+
+Searchbar.propTypes = {
+    setSearchQuery: PropTypes.func.isRequired
 }
 
 export default Searchbar

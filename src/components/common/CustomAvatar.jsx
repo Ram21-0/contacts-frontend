@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { Avatar } from '@mui/material';
+import PropTypes from 'prop-types'
+
 
 function CustomAvatar(props) {
 
@@ -22,6 +24,12 @@ function CustomAvatar(props) {
             {avatarText}
         </Avatar>
     )
+}
+
+CustomAvatar.propTypes = {
+    text: PropTypes.string,
+    square: PropTypes.any,
+    size: PropTypes.number
 }
 
 export default CustomAvatar

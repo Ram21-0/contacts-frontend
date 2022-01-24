@@ -3,6 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from '@mui/material';
+import PropTypes from 'prop-types'
 
 function PopupCard(props) {
 
@@ -28,6 +29,14 @@ function PopupCard(props) {
             </DialogActions>
         </Dialog>
     )
+}
+
+PopupCard.propTypes = {
+    title: PropTypes.string,
+    openDialog: PropTypes.bool,
+    setOpenDialog: PropTypes.func,
+    setConfirmation: PropTypes.func
+
 }
 
 export default PopupCard;

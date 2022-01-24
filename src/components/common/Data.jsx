@@ -1,5 +1,6 @@
 import React from 'react';
 import "./css/data.css"
+import PropTypes from 'prop-types'
 
 function Data(props) {
 
@@ -15,6 +16,11 @@ function Data(props) {
             
         </div>
     )
+}
+
+Data.propTypes = {
+    label: PropTypes.string,
+    value: PropTypes.any
 }
 
 export default Data;

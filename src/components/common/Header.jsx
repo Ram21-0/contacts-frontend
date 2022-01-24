@@ -5,6 +5,8 @@ import { IconButton, Tooltip } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom'
 import Searchbar from './Searchbar';
 import Logout from '../auth/Logout';
+import PropTypes from 'prop-types'
+
 
 function Header(props) {
 
@@ -48,6 +50,12 @@ function Header(props) {
             </div>
         </div>
     )
+}
+
+Header.propTypes = {
+    title: PropTypes.string.isRequired,
+    search: PropTypes.any,
+    setSearchQuery: PropTypes.func
 }
 
 export default Header

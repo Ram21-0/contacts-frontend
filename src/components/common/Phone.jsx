@@ -3,6 +3,8 @@ import CallIcon from '@mui/icons-material/Call';
 
 import "./css/email.css"
 import { Tooltip } from '@mui/material';
+import PropTypes from 'prop-types'
+
 
 function Phone(props) {
 
@@ -20,6 +22,10 @@ function Phone(props) {
             <div>{phoneNo}</div>
         </div>
   )
+}
+
+Phone.propTypes = {
+    phoneNo: PropTypes.string
 }
 
 export default Phone;

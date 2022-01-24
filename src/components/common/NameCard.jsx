@@ -3,6 +3,7 @@ import "./css/nameCard.css"
 import CustomAvatar from './CustomAvatar';
 import Email from './Email';
 import Phone from './Phone';
+import PropTypes from 'prop-types'
 
 function NameCard(props) {
     return (
@@ -37,6 +38,12 @@ function NameCard(props) {
             
         </div>
     )
+}
+
+NameCard.propTypes = {
+    name: PropTypes.string,
+    phoneNo: PropTypes.string,
+    emailId: PropTypes.string
 }
 
 export default NameCard;

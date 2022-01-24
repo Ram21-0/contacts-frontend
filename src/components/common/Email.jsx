@@ -1,9 +1,9 @@
 import React from 'react';
 import EmailIcon from '@mui/icons-material/Email';
-import CallIcon from '@mui/icons-material/Call';
 
 import "./css/email.css"
 import { Tooltip } from '@mui/material';
+import PropTypes from 'prop-types'
 
 function Email(props) {
 
@@ -22,6 +22,10 @@ function Email(props) {
             <div>{emailId}</div>
         </div>
   )
+}
+
+Email.propTypes = {
+    emailId: PropTypes.string
 }
 
 export default Email;
