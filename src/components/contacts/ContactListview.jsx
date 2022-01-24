@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react'
-import { connect } from "react-redux"
-import { fetchContacts } from '../../redux/reducerIndex'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import ContactListItem from './ContactListItem'
@@ -28,7 +26,8 @@ function ContactListview(props) {
     }
 
     return (
-        <div style={style}>
+        // <div style={style}>
+        <div className='contactt-list-container'>
             {
                 props.list.map( 
                     contact => <ContactListItem key={contact.contactId} contact={contact}/> 
@@ -46,19 +45,4 @@ function ContactListview(props) {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        contacts: state.contacts
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchAllContacts: () => dispatch(fetchContacts())
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ContactListview)
+export default ContactListview

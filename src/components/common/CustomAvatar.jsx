@@ -1,12 +1,10 @@
 import React from 'react';
 
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar } from '@mui/material';
 
 function CustomAvatar(props) {
 
-    let avatarStyle = {}
     let iconStyle = {}
-
     let avatarText = props.text ? props.text[0].toUpperCase() : "A"
 
     if(props.square) {
@@ -19,14 +17,10 @@ function CustomAvatar(props) {
         iconStyle.fontSize = props.size
     }
 
-
     return (
-        // <IconButton style={{width:60,height:60}}>
-            <Avatar style={iconStyle}>
-                {avatarText}
-            </Avatar>
-        // </IconButton>
-        
+        <Avatar style={iconStyle} >
+            {avatarText}
+        </Avatar>
     )
 }
 

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
@@ -7,6 +6,9 @@ import Box from "@material-ui/core/Box";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux"
 import { useNavigate } from 'react-router-dom';
+import { axiosPostRequest, axiosPutRequest } from "../../axios/axios";
+import { ADD_CONTACT_PATH, UPDATE_CONTACT_PATH } from "../../axios/endpoints";
+import { handleErrors } from "../../axios/errors";
 
 function CreateContact(props) {
 
@@ -19,6 +21,8 @@ function CreateContact(props) {
       const navigate = useNavigate()
 
       const existingContact = props.contact
+      const user = props.user
+
       const onSubmit = props.onFormSubmit
 
       return (

@@ -8,6 +8,7 @@ import { connect } from "react-redux"
 
 import { axiosPutRequest } from '../../axios/axios';
 import { UPDATE_CONTACT_PATH } from '../../axios/endpoints';
+import { handleErrors } from '../../axios/errors';
 
 
 function EditContactForm(props) {
@@ -35,7 +36,7 @@ function EditContactForm(props) {
                 navigate("/contacts/" + editedContact.contactId, {state: editedContact})
             },
             (error) => {
-                console.log(error)
+                handleErrors(error)
             }
         )
     }

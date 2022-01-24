@@ -26,16 +26,17 @@ function InformationCard(props) {
                 
             </div>
                 
-                {
-                    props.edit
-                    && <div className="fab-edit">
-                        <Tooltip title="Edit">
-                            <Fab color="primary" onClick={props.editHandler}>
-                                <Edit />
-                            </Fab>
-                        </Tooltip>
-                    </div>
-                }
+            {
+                props.edit
+                && <div className="fab-edit">
+                    <Tooltip title="Edit">
+                        <Fab color="primary" onClick={props.editHandler}>
+                            <Edit />
+                        </Fab>
+                    </Tooltip>
+                </div>
+            }
+            
         </div>
     )
 }

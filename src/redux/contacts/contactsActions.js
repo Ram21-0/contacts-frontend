@@ -1,6 +1,7 @@
 import { DELETE_CONTACT, INSERT_CONTACT, SET_CONTACTS, UPDATE_CONTACT } from "./contactsActionTypes.js";
 import { axiosGetRequest } from "../../axios/axios.js";
 import { CONTACTS_PATH } from "../../axios/endpoints.js";
+import { handleErrors } from "../../axios/errors.js";
 
 export const fetchContacts = (user) => {
 
@@ -12,7 +13,7 @@ export const fetchContacts = (user) => {
                 dispatch(setContactsAction(response.data)) 
             },
             (error) => { 
-                console.log(error) 
+                handleErrors(error) 
             }
         )
     }

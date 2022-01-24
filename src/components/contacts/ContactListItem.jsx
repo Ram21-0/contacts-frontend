@@ -13,6 +13,7 @@ import Phone from '../common/Phone';
 import { axiosDeleteRequest, axiosPostRequest } from '../../axios/axios';
 import { DELETE_CONTACT_PATH, GET_CONTACT_BY_ID_PATH } from '../../axios/endpoints';
 import PopupCard from '../common/PopupCard';
+import { handleErrors } from '../../axios/errors';
 
 function ContactListItem(props) {
 
@@ -28,7 +29,7 @@ function ContactListItem(props) {
             `${DELETE_CONTACT_PATH}/${contact.contactId}`,
             user,
             (response) => { props.deleteContact(contact) },
-            (error) => { console.log(error) }
+            (error) => { handleErrors(error) }
         )
         setDeleteConfirmation(false)
     }
@@ -43,7 +44,7 @@ function ContactListItem(props) {
             user,
             {},
             (response) => { props.updateContact(response.data) },
-            (error) => { console.log(error) }
+            (error) => { handleErrors(error) }
         )
         
         navigate("/contacts/" + contact.contactId, {state: contact})

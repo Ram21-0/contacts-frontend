@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom'
 import { connect } from "react-redux"
 import { axiosAuthenticateRequest } from '../../axios/axios';
 import { REGISTER_PATH } from '../../axios/endpoints';
+import { handleErrors } from '../../axios/errors';
 
 
 
@@ -37,7 +38,9 @@ function Register(props) {
                   })
                   navigate("/contacts")
               },
-              (error) => { console.log("err in reg", error) }
+              (error) => {
+                handleErrors(error)
+            }
           )
         
         };

@@ -7,6 +7,7 @@ import ContactForm from './ContactForm';
 
 import { axiosPostRequest } from '../../axios/axios';
 import { ADD_CONTACT_PATH } from '../../axios/endpoints';
+import { handleErrors } from '../../axios/errors';
 
 
 function CreateContactForm(props) {
@@ -28,7 +29,7 @@ function CreateContactForm(props) {
                 props.insertContact(newContact)
                 navigate("/contacts/" + newContact.contactId, {state: newContact})
             },
-            (error) => { console.log(error) }
+            (error) => { handleErrors(error) }
         )
     };
 

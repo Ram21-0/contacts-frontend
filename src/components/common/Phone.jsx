@@ -1,5 +1,4 @@
 import React from 'react';
-import EmailIcon from '@mui/icons-material/Email';
 import CallIcon from '@mui/icons-material/Call';
 
 import "./css/email.css"

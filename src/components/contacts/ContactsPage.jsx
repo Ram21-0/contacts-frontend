@@ -18,6 +18,13 @@ function ContactsPage(props) {
 
     const [searchQuery, setSearchQuery] = useState("")
 
+    function syncWithDatabase() {
+        if(!props.user.loggedIn) {
+            navigate("/login") 
+        }
+        fetchAllContactsFunc(props.user)
+    }
+
     useEffect(() => {
         if(!props.user.loggedIn) {
             navigate("/login") 
@@ -27,27 +34,29 @@ function ContactsPage(props) {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            if(!props.user.loggedIn) {
-                navigate("/login") 
-            }
-            fetchAllContactsFunc(props.user)
+            syncWithDatabase()
         }, 5000);
         return () => clearInterval(interval);
     }, []);
     
     const contactList = Object.values(props.contacts.contacts)
 
-    function compareFunction(contact1,contact2) {
+    function contactComparatorByScore(contact1,contact2) {
+        // compare contacts first by their score, then by name
         if(contact1.score === contact2.score) {
             return contact1.name.localeCompare(contact2.name)
         }
         return contact2.score - contact1.score
     }
 
+    function contactComparatorByName(contact1,contact2) {
+        return contact1.name.localeCompare(contact2.name)
+    }
+
     function getListFromSearchQuery() {
-        if(!searchQuery || searchQuery === "") return contactList
+        if(!searchQuery || searchQuery === "") return contactList.sort(contactComparatorByScore)
         return contactList.filter(contact => contact.name.trim().toLowerCase().startsWith(searchQuery))
-            .sort(compareFunction)
+            .sort(contactComparatorByScore)
     }
 
     return (
