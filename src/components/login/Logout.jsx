@@ -1,6 +1,7 @@
-import { Button } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import React from 'react';
 import { connect } from "react-redux"
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import { logoutCurrentUser } from '../../redux/reducerIndex';
 import { useNavigate } from 'react-router-dom'
@@ -15,9 +16,11 @@ function Logout(props) {
     }
 
     return (
-        <div>
-            <Button onClick={logoutHandler}>Logout</Button>
-        </div>
+        <Tooltip title="Logout">
+            <IconButton onClick={logoutHandler}>
+                <LogoutIcon style={{ fontSize: '48' }}/>
+            </IconButton>
+        </Tooltip>
     )
 }
 

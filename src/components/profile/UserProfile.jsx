@@ -1,15 +1,24 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import { connect } from "react-redux"
+
 import Header from '../common/Header'
 import InformationCard from '../common/InformationCard'
 import "./userProfile.css"
 
+import { useNavigate } from 'react-router-dom'
+
 function UserProfile(props) {
 
-    const user = props.user.user
+    const navigate = useNavigate()
 
-    console.log(props.user.user)
+    useEffect(() => {
+        if(!props.user.user) {
+            navigate("/login") 
+        }
+    }, [])
+
+    const user = props.user.user || {}
 
     const dataValues = [
         { label: "Address", value: user.address },

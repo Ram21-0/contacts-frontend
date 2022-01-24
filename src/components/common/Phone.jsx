@@ -8,11 +8,15 @@ import { Tooltip } from '@mui/material';
 function Phone(props) {
 
     const phoneNo = props.phoneNo
+    const onClick = (event) => {
+        window.location = `tel:${phoneNo}`
+        event.preventDefault()
+    }
 
     return (
         <div className='email'>
             <Tooltip title={`Call ${phoneNo}`}>
-                <CallIcon onClick={()=>console.log("call " + phoneNo)}/>
+                <CallIcon onClick={(e) => onClick(e)}/>
             </Tooltip>
             <div>{phoneNo}</div>
         </div>

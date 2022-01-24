@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux"
+import { useNavigate } from 'react-router-dom';
 
 function CreateContact(props) {
 
@@ -15,12 +16,14 @@ function CreateContact(props) {
         formState: { errors },
       } = useForm();
 
+      const navigate = useNavigate()
+
       const existingContact = props.contact
       const onSubmit = props.onFormSubmit
 
       return (
         <Container maxWidth="xs">
-          <h1>Contact</h1>
+          <h1>{existingContact ? existingContact.name : "New Contact"}</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
 
             <Box mb={2}>
@@ -93,13 +96,11 @@ function CreateContact(props) {
 
 
             <Button type="submit" variant="contained" color="primary" >
-              Publish 
+              {existingContact ? "SAVE" : "ADD"} 
             </Button>
-            <Link to="/contacts">
-            <Button >
-              Discard 
+            <Button onClick={() => navigate("/contacts")}>
+              {"DISCARD"} 
             </Button>
-            </Link>
           </form>
         </Container>
       );

@@ -9,10 +9,15 @@ function Email(props) {
 
     const emailId = props.emailId
 
+    const onClick = (event) => {
+        window.location = `mailto:${emailId}`
+        event.preventDefault()
+    }
+
     return (
         <div className='email'>
             <Tooltip title={`Mail ${emailId}`}>
-                <EmailIcon onClick={()=>console.log("mail" + emailId)}/>
+                <EmailIcon onClick={(event) => onClick(event)}/>
             </Tooltip>
             <div>{emailId}</div>
         </div>

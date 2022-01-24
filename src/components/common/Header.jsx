@@ -1,12 +1,12 @@
 import React from 'react'
-import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "./css/header.css"
-import { Icon, IconButton } from '@mui/material';
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { IconButton, Tooltip } from '@mui/material';
+import { useNavigate, useLocation } from 'react-router-dom'
 import Searchbar from './Searchbar';
-import CustomAvatar from './CustomAvatar';
-
+import { connect } from "react-redux"
+import { logoutCurrentUser } from '../../redux/reducerIndex';
+import Logout from '../login/Logout';
 
 function Header(props) {
 
@@ -19,9 +19,22 @@ function Header(props) {
         }
     }
 
-    function handleProfileClick(event) {
-        navigate("/profile")
-    }
+    const profileClick = () => navigate("/profile")
+
+    const profileIcon = (<Tooltip title="Profile">
+                            <IconButton onClick={profileClick}>
+                                <AccountCircleIcon style={{ fontSize: '48' }} />
+                            </IconButton>
+                        </Tooltip>)
+    const logoutIcon = <Logout/>
+
+    let icon = location.pathname === "/profile" ? logoutIcon : profileIcon
+    // if(location.pathname === "/profile") {
+    //     icon = logoutIcon
+    // } 
+    // else {
+    //     icon = profileIcon
+    // }
 
     return (
         <div className='header'>
@@ -40,12 +53,25 @@ function Header(props) {
             </div>
 
             <div className="profile-container">
-                <IconButton onClick={handleProfileClick}>
-                    <AccountCircleIcon style={{ fontSize: '48' }} />
-                </IconButton>
+                {icon}
             </div>
         </div>
     )
 }
 
-export default Header
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(logoutCurrentUser())
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Header)

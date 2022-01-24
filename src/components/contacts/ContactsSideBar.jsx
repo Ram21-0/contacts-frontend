@@ -2,7 +2,7 @@ import React from 'react';
 import Logout from '../login/Logout';
 
 function ContactsSideBar() {
-  return <div><Logout/></div>;
+  return <div></div>;
 }
 
 export default ContactsSideBar;
