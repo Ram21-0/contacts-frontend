@@ -1,0 +1,43 @@
+.contact-container {
+    margin-top: 5%;
+    height: fit-content;
+    width: fit-content;
+    max-width: 60vw;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    padding: 2%;
+    justify-self: center;
+    flex-direction: column;
+    overflow-y: auto;
+    border: lightgrey 1px solid;
+    border-radius: 20px;
+    /* background-color: lightpink; */
+}
+
+.contact-head {
+    display: flex;
+    height: max-content;
+}
+
+.contact-head-img {
+    flex: 0.2;
+}
+
+.contact-head-data {
+    flex: 0.8;
+}
+
+.contact-name {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.contact-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none;
+}

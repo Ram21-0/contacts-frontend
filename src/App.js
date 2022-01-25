@@ -1,30 +1,25 @@
-import { BrowserRouter as Router ,Switch ,Route} from "react-router-dom"
-import Header from "./components/Header";
+import { Route, Routes } from "react-router-dom"
 
 import './App.css';
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+
+import ContactsPage from "./components/contacts/ContactsPage";
+
+import Root from "./components/Root";
+import UserProfile from "./components/profile/UserProfile";
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Switch>
-          <Route path="/" exact component ={LandingPage}></Route>
-          <Route path="/about" component={About}></Route>
-          <Route path="/login" component={Login}></Route>
-          <Route path="/register" component={Register}></Route>
-          <Route path="/cts" component ={Contact}></Route>
-          <Route path="/myProfile" component={MyProflie}></Route>
-        </Switch>
-      </div>
-      <Header/>
-      <Routes>
 
-        <Route path="/" element={<Link to="/contacts">Link</Link>}>  </Route>
-        <Route path="/contacts"/>
-      </Routes>
-  </Router>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Root/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/register" element={<Register/>} />
+            <Route path="/contacts/*" element = {<ContactsPage/>} />
+            <Route path="/profile" element={<UserProfile/>} />
+        </Routes>
+    )
 }
 
 export default App;

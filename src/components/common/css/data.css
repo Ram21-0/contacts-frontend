@@ -1,0 +1,13 @@
+.data-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.data-value {
+    font-size: 1.5rem;
+}
+
+.data-label {
+    color: deepskyblue;
+}

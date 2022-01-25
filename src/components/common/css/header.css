@@ -3,7 +3,8 @@
     /* width: 100%; */
     height: fit-content;
     background-color: lightblue;
-    padding: 2%  2%;
+    padding: 20px 20px 20px 40px;
+    align-items: center;
 }
 
 .title {
@@ -15,14 +16,20 @@
     color: darkblue;
     padding: 0;
     height: fit-content;
+    cursor: pointer;
 }
 
 .search-container {
-    flex: 0.6;
+    flex: 0.7;
+}
+
+.profile-container {
+    flex: 0.1;
+    text-align: center;
 }
 
 .settings-container {
-    flex: 0.1;
+    /* flex: 0.1; */
     text-align: center;
 }
 
@@ -30,7 +37,4 @@
     font-size: 48;
 }
 
-.profile-container {
-    flex: 0.1;
-    text-align: center;
-}
+

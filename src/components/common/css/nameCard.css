@@ -1,0 +1,27 @@
+.card-name-container {
+    display: flex;
+    gap: 20px;
+}
+
+.name-card-avatar {
+    width: fit-content;
+}
+
+.name-card-body {
+    display: flex;   
+    flex-direction: column; 
+    gap: 20px;
+}
+
+.name-card-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-size: 2rem;
+}
+
+.contact-details {
+
+}

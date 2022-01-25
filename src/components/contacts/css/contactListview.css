@@ -1,0 +1,18 @@
+.fab {
+    margin: 0px;
+    top: auto;
+    align-self: flex-end;
+    right: 50px;
+    bottom: 30px;
+    left: auto;
+    position: fixed;
+};
+
+.contactt-list-container {
+    height: 100%;
+    width: 100%;
+    padding-right: 5%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
